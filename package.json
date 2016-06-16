@@ -1,0 +1,24 @@
+{
+  "name": "ng-esm",
+  "version": "0.0.1",
+  "description": "Angular for ES2015; use decorators instead of modules.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "ES2015",
+    "ES6",
+    "decorators"
+  ],
+  "author": "Christian Svensson <csvn.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.7"
+  },
+  "devDependencies": {
+    "tslint": "^3.11.0",
+    "typescript": "^1.8.10"
+  }
+}

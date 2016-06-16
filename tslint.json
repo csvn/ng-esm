@@ -1,0 +1,87 @@
+{
+  "rules": {
+    "no-internal-module": true,
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+
+
+    "forin": true,
+    "no-duplicate-variable": true,
+    "no-arg": true,
+    "no-eval": true,
+    "no-unused-expression": true,
+    "no-unused-variable": [
+      true
+    ],
+    "no-var-keyword": true,
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+
+
+    "eofline": true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "max-line-length": [
+      true,
+      80
+    ],
+    "no-trailing-whitespace": true,
+    "no-trailing-comma": true,
+
+
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "jsdoc-format": true,
+    "new-parens": true,
+    "one-line": [
+      true,
+      "check-catch",
+      "check-finally",
+      "check-else",
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case",
+      "ban-keywords"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  }
+}
