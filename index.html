@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ng-esm</title>
+</head>
+<body>
+  <script src="system.js"></script>
+  <script src="dist/main.js"></script>
+  <script>
+    System.config({
+      baseURL: '/',
+      paths: {
+        'npm:*': 'node_modules/*'
+      },
+      map: {
+        'angular': 'npm:angular/angular.js',
+        'uuid': 'npm:uuid-v4/index.js'
+      }
+    });
+
+    System.import('main');
+  </script>
+</body>
+</html>

@@ -4,6 +4,7 @@
   "description": "Angular for ES2015; use decorators instead of modules.",
   "main": "index.js",
   "scripts": {
+    "start": "browser-sync start -s . -f dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,6 +19,7 @@
     "angular": "^1.5.7"
   },
   "devDependencies": {
+    "browser-sync": "^2.13.0",
     "tslint": "^3.11.0",
     "typescript": "^1.8.10"
   }

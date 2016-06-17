@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "module": "system",
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "outFile": "dist/main.js"
   },
+  "compileOnSave": true,
   "files": [
-    "main.ts"
+    "main.ts",
+    "typings/index.d.ts"
   ]
 }

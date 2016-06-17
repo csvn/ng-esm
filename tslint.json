@@ -38,7 +38,13 @@
       80
     ],
     "no-trailing-whitespace": true,
-    "no-trailing-comma": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
 
 
     "class-name": true,

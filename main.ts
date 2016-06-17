@@ -1,2 +1,5 @@
-export { bar } from './src/module';
-//ifo jewjf woejfi weojf weojfweoj fweojf weojfwo ejfweojf weojf weojf weojf weojf weojfi weojfie
+import 'angular';
+import { Component } from './src/index';
+
+@Component({ name: '' })
+class MyView {}
