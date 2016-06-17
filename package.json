@@ -4,7 +4,9 @@
   "description": "Angular for ES2015; use decorators instead of modules.",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start -s . -f dist",
+    "start": "browser-sync start -s . -f dist --no-open",
+    "build": "tsc -p .",
+    "build:watch": "tsc -w -p .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

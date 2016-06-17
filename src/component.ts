@@ -4,6 +4,7 @@ import { create } from './ng';
 export function Component(config: ComponentConfig) {
   return function(target: Function) {
     console.log(target);
+    create();
   };
 }
 

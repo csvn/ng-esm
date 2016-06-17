@@ -1,5 +1,5 @@
-import ng from 'angular';
-
 export function create() {
-  ng.element('foo');
+
 }
+
+console.log('foo!', angular);

@@ -4,6 +4,7 @@
     "module": "system",
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "outFile": "dist/main.js"
   },
   "compileOnSave": true,
