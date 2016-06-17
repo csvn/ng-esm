@@ -4,10 +4,11 @@
   "description": "Angular for ES2015; use decorators instead of modules.",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start -s . -f dist --no-open",
+    "start": "run-p serve build:watch",
+    "serve": "browser-sync start -s . -f dist --no-open",
     "build": "tsc -p .",
     "build:watch": "tsc -w -p .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "typings install"
   },
   "keywords": [
     "angular",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",
+    "npm-run-all": "^2.1.2",
     "tslint": "^3.11.0",
     "typescript": "^1.8.10"
   }
