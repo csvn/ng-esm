@@ -1,11 +1,11 @@
-import { BaseConfig, register } from './ng';
+import { BaseConfig, register } from '../ng';
 
 
 export function Filter(config?: BaseConfig) {
   return function(target: FilterConstructor): void {
     register(target, config)
-      .filter(($controller: angular.IControllerService) => {
-        let filter = $controller(target);
+      .filter(($injector: angular.auto.IInjectorService) => {
+        let filter = $injector.instantiate<FilterTransform>(target);
 
         return (value, ...args) => filter.$transform(value, ...args);
       });

@@ -1,3 +1,2 @@
-export * from './component';
-export * from './filter';
-export * from './module';
+export * from './common';
+export * from './register/index';

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "run-p serve build:watch",
-    "serve": "browser-sync start -s . -f dist --no-open",
+    "serve": "browser-sync start -s . -f index.html dist --no-open",
     "build": "tsc -p .",
     "build:watch": "tsc -w -p .",
     "postinstall": "typings install"

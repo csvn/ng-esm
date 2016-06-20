@@ -1,4 +1,4 @@
-import { BaseConfig, register } from './ng';
+import { BaseConfig, register } from '../ng';
 
 
 export function Component(config: ComponentConfig) {
