@@ -2,7 +2,8 @@
   "name": "ng-esm",
   "version": "0.1.0",
   "description": "ES2015 modules and decorators with Angular 1",
-  "main": "src/main.js",
+  "main": "dist/main.js",
+  "typings": "dist/main.d.ts",
   "scripts": {
     "start": "run-p example:watch example:serve",
     "example:watch": "tsc -w -p example",
