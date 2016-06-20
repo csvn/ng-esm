@@ -1,19 +1,22 @@
-import { createModule } from './ng';
+import { BaseConfig, register } from './ng';
 
 
-export function Filter(target: Function) {
-  createModule(target)
-      .filter(target.name, target);
+export function Filter(config?: BaseConfig) {
+  return function(target: FilterConstructor): void {
+    register(target, config)
+      .filter(($controller: angular.IControllerService) => {
+        let filter = $controller(target);
+
+        return (value, ...args) => filter.$transform(value, ...args);
+      });
+  };
 }
 
 
-interface ComponentConfig {
-  name: string;
-  dependencies?: string[];
-  controllerAs?: string;
-  template?: string | Function;
-  templateUrl?: string | Function;
-  bindings?: {[binding: string]: string};
-  transclude?: boolean | {[slot: string]: string};
-  require?: string | string[] | {[controller: string]: string};
+export interface FilterTransform {
+  $transform(value: any, ...args: any[]): any;
+}
+
+interface FilterConstructor {
+  new (...injectables: any[]): FilterTransform;
 }

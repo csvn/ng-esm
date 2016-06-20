@@ -1,8 +1,8 @@
-import { dependencyNames } from './ng';
+import { register } from './ng';
 
 
 export function Module(dependencies: Function[]) {
   return function(target: Function): void {
-    angular.module(target.name, dependencyNames(dependencies));
+    register(target, { dependencies }, true);
   };
 }

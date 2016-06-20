@@ -1,28 +1,22 @@
-import { createModule } from './ng';
-import { toCamel } from './case';
+import { BaseConfig, register } from './ng';
 
 
 export function Component(config: ComponentConfig) {
   return function(target: Function): void {
-    let componentConfig: angular.IComponentOptions = config,
-        name = toCamel(config.name ? config.name : target.name);
+    let componentConfig: angular.IComponentOptions = config;
 
     componentConfig.controller = target;
-    console.log('component-name:', name);
 
-    createModule(target, config.dependencies)
-      .component(name, componentConfig);
+    register(target, config).component(componentConfig);
   };
 }
 
 
-interface ComponentConfig {
-  name?: string;
-  dependencies?: string[];
+export interface ComponentConfig extends BaseConfig {
   controllerAs?: string;
   template?: string | Function;
   templateUrl?: string | Function;
   bindings?: {[binding: string]: string};
   transclude?: boolean | {[slot: string]: string};
-  require?: string | string[] | {[controller: string]: string};
+  require?: {[controller: string]: string};
 }
