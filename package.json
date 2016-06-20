@@ -6,7 +6,7 @@
   "scripts": {
     "start": "run-p example:watch example:serve",
     "example:watch": "tsc -w -p example",
-    "example:serve": "browser-sync start -s . -f example --no-open",
+    "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
     "build": "tsc -p .",
     "postinstall": "typings install"
   },
