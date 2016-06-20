@@ -1,7 +1,7 @@
 {
   "name": "ng-esm",
   "version": "0.0.1",
-  "description": "Angular for ES2015; use decorators instead of modules.",
+  "description": "ES2015 modules and decorators with Angular 1",
   "main": "index.js",
   "scripts": {
     "start": "run-p serve build:watch",

@@ -1,6 +1,6 @@
 # ng-esm
 
-> For using Angular with ecmascript modules and ES2015
+> ES2015 modules and decorators with Angular 1
 
 ## Progress
 * Currently pre-alpha
