@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2015",
+    "module": "es2015",
     "sourceMap": true,
-    "module": "system",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "outFile": "dist/main.js"
+    "declaration": true,
+    "noImplicitAny": true,
+    "outDir": "dist"
   },
-  "compileOnSave": true,
   "files": [
-    "main.ts",
+    "src/main.ts",
     "typings/index.d.ts"
   ]
 }

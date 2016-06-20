@@ -1,4 +1,7 @@
 import 'angular';
+import 'angular-aria';
+import 'angular-animate';
+import ngMaterial from 'angular-material';
 import {
   Run,
   Config,
@@ -9,11 +12,12 @@ import {
   Service,
 
   OnInit
-} from './src/index';
+} from '../src/main';
+
 
 @Run()
 class Logger implements OnInit {
-  constructor(private $log: angular.ILogService) {}
+  constructor(private $log: ng.ILogService) {}
 
   $onInit() {
     this.$log.info('This is great');
@@ -25,7 +29,7 @@ class Logger implements OnInit {
 
 @Config()
 class HttpConfig implements OnInit {
-  constructor(private $httpProvider: angular.IHttpProvider) {}
+  constructor(private $httpProvider: ng.IHttpProvider) {}
 
   $onInit() {
     console.log('Setting $http config');
@@ -42,7 +46,7 @@ class MyView {
 
 @Service()
 class Fooifyer {
-  num: angular.IFilterNumber;
+  num: ng.IFilterNumber;
 
   constructor($filter) {
     this.num = $filter('number');
@@ -63,5 +67,5 @@ class Fooify implements FilterTransform {
   }
 }
 
-@Module([Logger, HttpConfig, MyView, Fooify])
+@Module([ngMaterial, Logger, HttpConfig, MyView, Fooify])
 class App {}

@@ -7,7 +7,11 @@ export function Filter(config?: BaseConfig) {
       .filter(($injector: angular.auto.IInjectorService) => {
         let filter = $injector.instantiate<FilterTransform>(target);
 
-        return (value, ...args) => filter.$transform(value, ...args);
+        if (typeof filter.$transform !== 'function') {
+          throw new Error('"$transform" method required for Filter class');
+        }
+
+        return filter.$transform.bind(filter);
       });
   };
 }
@@ -17,6 +21,6 @@ export interface FilterTransform {
   $transform(value: any, ...args: any[]): any;
 }
 
-interface FilterConstructor {
+export interface FilterConstructor {
   new (...injectables: any[]): FilterTransform;
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ng-esm</title>
+  <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" />
+</head>
+<body ng-cloak ng-app="app" layout="column">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h1>ng-esm example</h1>
+    </div>
+  </md-toolbar>
+
+  <md-content flex>
+    <my-view>My view!</my-view>
+
+    Fooify this: {{ 1583471239 | fooify }}
+  </md-content>
+
+  <script src="system.js"></script>
+  <script src="dist/main.js"></script>
+  <script>
+    System.config({
+      baseURL: '/example',
+      paths: {
+        'npm:*': '../node_modules/*',
+        'ng:*': '../node_modules/angular-*'
+      },
+      map: {
+        'angular': 'npm:angular/index.js',
+        'angular-aria': 'ng:aria/index.js',
+        'angular-animate': 'ng:animate/index.js',
+        'angular-material': 'ng:material/index.js'
+      },
+      packages: {
+        '../node_modules': {
+          main: 'index.js',
+          format: 'cjs',
+          defaultExtension: 'js'
+        }
+      }
+    });
+
+    System.import('example/main');
+  </script>
+</body>
+</html>

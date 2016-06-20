@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+
+    "target": "es6",
+    "sourceMap": true,
+    "module": "system",
+    // "isolatedModules": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "outFile": "dist/main.js"
+  },
+  "compileOnSave": true,
+  "files": [
+    "main.ts",
+    "../typings/index.d.ts"
+  ]
+}

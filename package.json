@@ -2,12 +2,12 @@
   "name": "ng-esm",
   "version": "0.1.0",
   "description": "ES2015 modules and decorators with Angular 1",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "run-p serve build:watch",
-    "serve": "browser-sync start -s . -f index.html dist --no-open",
+    "start": "run-p example:watch example:serve",
+    "example:watch": "tsc -w -p example",
+    "example:serve": "browser-sync start -s . -f example --no-open",
     "build": "tsc -p .",
-    "build:watch": "tsc -w -p .",
     "postinstall": "typings install"
   },
   "keywords": [
@@ -26,6 +26,9 @@
     "angular": "^1.5.7"
   },
   "devDependencies": {
+    "angular-animate": "^1.5.7",
+    "angular-aria": "^1.5.7",
+    "angular-material": "^1.1.0-rc.5",
     "browser-sync": "^2.13.0",
     "npm-run-all": "^2.1.2",
     "tslint": "^3.11.0",

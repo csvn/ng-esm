@@ -10,6 +10,7 @@
     * decorator
     * factory
     * directive
+    * controller
 * Create unit tests for every register method
 * Iteration and "Eat your own dog food" to improve the API
 * Documentation
@@ -104,9 +105,7 @@ export default Module('components', [
 
 In the above example, an ng-module will be created with the name `"components"`, that can be used normally as a dependency in other modules/components, or bootstrapped with Angular.
 
-
-
-
+-----------------------------------------------------------
 
 ## License
 The MIT License (MIT)
