@@ -27,13 +27,15 @@ class Logger implements OnInit {
   }
 }
 
-@Config()
-class HttpConfig implements OnInit {
-  constructor(private $httpProvider: ng.IHttpProvider) {}
+@Config([ngMaterial])
+class MaterialConfig implements OnInit {
+  constructor(private $mdThemingProvider: ng.material.IThemingProvider) {}
 
   $onInit() {
-    console.log('Setting $http config');
-    this.$httpProvider.defaults.headers.get = { foo: 'bar' };
+    console.log('Configuring $mdTheme');
+    this.$mdThemingProvider
+      .theme('default')
+      .primaryPalette('amber');
   }
 }
 
@@ -53,7 +55,6 @@ class Fooifyer {
   }
 
   toFoo(val: string) {
-    console.log('toFoo!');
     return `${this.num(val)} FOO`;
   }
 }
@@ -67,5 +68,5 @@ class Fooify implements FilterTransform {
   }
 }
 
-@Module([ngMaterial, Logger, HttpConfig, MyView, Fooify])
+@Module([Logger, MaterialConfig, MyView, Fooify])
 class App {}
