@@ -16,10 +16,6 @@
       "args": ["run", "build"]
     },
     {
-      "taskName": "watch",
-      "args": ["run", "build:watch"]
-    },
-    {
       "taskName": "install",
       "args": ["install"]
     }

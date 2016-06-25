@@ -12,7 +12,7 @@ import {
   Service,
 
   OnInit
-} from '../src/main';
+} from 'ng-esm';
 
 
 @Run()

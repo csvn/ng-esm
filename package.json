@@ -4,12 +4,18 @@
   "description": "ES2015 modules and decorators with Angular 1",
   "main": "dist/main.cjs.js",
   "jsnext:main": "dist/main.es.js",
-  "typings": "dist/main.ts.d.ts",
+  "typings": "dist/main.d.ts",
+  "files": [
+    "dist",
+    "example"
+  ],
   "scripts": {
     "start": "run-p example:watch example:serve",
-    "example:watch": "tsc -w -p example",
+    "example:watch": "rollup -w -c rollup.example.config.js",
     "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
-    "build": "rollup -c && tsc -p . -m system --outFile dist/main.ts.js",
+    "build": "rollup -c",
+    "prebuild": "rimraf dist",
+    "postbuild": "tsc -p . -m system --outFile dist/main.js && rimraf dist/main.js dist/main.js.map",
     "postinstall": "typings install"
   },
   "keywords": [
@@ -32,9 +38,12 @@
     "angular-aria": "^1.5.7",
     "angular-material": "^1.1.0-rc.5",
     "browser-sync": "^2.13.0",
+    "ng-esm": "0.2.0",
     "npm-run-all": "^2.1.2",
+    "rimraf": "^2.5.2",
     "rollup": "^0.32.0",
     "rollup-plugin-typescript": "^0.7.6",
+    "rollup-watch": "^2.4.0",
     "tslint": "^3.11.0",
     "typescript": "^1.8.10"
   }
