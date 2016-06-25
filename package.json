@@ -16,7 +16,8 @@
     "build": "rollup -c",
     "prebuild": "rimraf dist",
     "postbuild": "tsc -p . -m system --outFile dist/main.js && rimraf dist/main.js dist/main.js.map",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "angular",
@@ -38,7 +39,7 @@
     "angular-aria": "^1.5.7",
     "angular-material": "^1.1.0-rc.5",
     "browser-sync": "^2.13.0",
-    "ng-esm": "0.2.0",
+    "ng-esm": "0.2.1",
     "npm-run-all": "^2.1.2",
     "rimraf": "^2.5.2",
     "rollup": "^0.32.0",
