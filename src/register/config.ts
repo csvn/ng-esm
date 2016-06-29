@@ -4,9 +4,11 @@ import { Dependencies, OnInit } from '../common';
 
 export function Config(dependencies?: Dependencies) {
   return function(target: InjectConstructor<OnInit>): void {
-    register(target, { dependencies })
-      .config(($injector: ng.auto.IInjectorService) => {
-        $injector.invoke(target).$onInit();
-      });
+    function configRunner($injector: ng.auto.IInjectorService): void {
+      $injector.invoke(target).$onInit();
+    }
+
+    configRunner.$inject = ['$injector'];
+    register(target, { dependencies }).config(configRunner);
   };
 }

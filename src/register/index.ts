@@ -4,3 +4,4 @@ export * from './filter';
 export * from './module';
 export * from './run';
 export * from './service';
+export * from './state';

@@ -9,12 +9,10 @@ export interface BaseConfig {
   dependencies?: Dependencies;
 }
 
-export interface ComponentOptions extends BaseConfig {
+export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {
   controller?: Function;
-  controllerAs?: string;
-  template?: string | Function | (string | Function)[];
-  templateUrl?: string | Function | (string | Function)[];
-  bindings?: {[binding: string]: string};
-  transclude?: boolean | string | {[slot: string]: string};
-  require?: {[controller: string]: string};
+}
+
+export interface StateOptions extends BaseConfig, ng.ui.IState {
+  name: string;
 }

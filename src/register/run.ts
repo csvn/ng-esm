@@ -4,9 +4,11 @@ import { Dependencies, OnInit } from '../common';
 
 export function Run(dependencies?: Dependencies) {
   return function(target: InjectConstructor<OnInit>): void {
-    register(target, { dependencies })
-      .run(($injector: ng.auto.IInjectorService) => {
-        $injector.invoke(target).$onInit();
-      });
+    function runRunner($injector: ng.auto.IInjectorService): void {
+      $injector.invoke(target).$onInit();
+    }
+
+    runRunner.$inject = ['$injector'];
+    register(target, { dependencies }).run(runRunner);
   };
 }
