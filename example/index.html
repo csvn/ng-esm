@@ -12,13 +12,13 @@
     </div>
   </md-toolbar>
 
-  <md-content flex>
+  <md-content flex ui-view>
     <my-view>My view!</my-view>
 
     Fooify this: {{ 1583471239 | fooify }}
   </md-content>
 
-  <script src="system.js"></script>
+  <script src="../node_modules/systemjs/dist/system.js"></script>
   <script src="dist/main.js"></script>
   <script>
     System.config({
@@ -32,7 +32,8 @@
         'angular-aria': 'ng:aria/index.js',
         'angular-animate': 'ng:animate/index.js',
         'angular-material': 'ng:material/index.js',
-        'ng-esm': 'npm:ng-esm/dist/main.es.js'
+        'angular-ui-router': 'ng:ui-router/release/angular-ui-router.js',
+        'ng-esm': 'npm:ng-esm/dist/main.js'
       },
       packages: {
         '../node_modules': {

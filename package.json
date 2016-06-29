@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "run-p example:watch example:serve",
-    "example:watch": "rollup -w -c",
+    "example:watch": "tsc -w -p example",
     "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
     "build": "tsc -p . && tsc -d -p . -m es2015 --outDir dist/esm",
     "prebuild": "rimraf dist",
@@ -43,6 +43,7 @@
     "rollup": "^0.32.0",
     "rollup-plugin-typescript": "^0.7.6",
     "rollup-watch": "^2.4.0",
+    "systemjs": "^0.19.31",
     "tslint": "^3.11.0",
     "typescript": "^1.8.10"
   }
