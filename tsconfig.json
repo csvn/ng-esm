@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "dist",
     "sourceMap": true,
-    "declaration": true,
     "noImplicitAny": true
   },
   "files": [

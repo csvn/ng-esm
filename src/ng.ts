@@ -1,25 +1,15 @@
 import { toCamel } from './case';
-
-export * from './common';
+import { BaseConfig, ComponentOptions } from './common';
 
 export {
-  Dependencies,
   BaseConfig,
   InjectFn,
   InjectConstructor,
   register
 };
 
-
 const ID_SYMBOL = Symbol('moduleId');
 
-
-type Dependencies = (string | Function)[];
-
-interface BaseConfig {
-  name?: string;
-  dependencies?: Dependencies;
-}
 
 interface InjectFn {
   (...injectables: any[]): void;
@@ -67,7 +57,7 @@ function register(
   // TODO: constant, decorator, directive, factory, value, controller?
 
   return {
-    component(componentConfig: angular.IComponentOptions) {
+    component(componentConfig: ComponentOptions) {
       console.log('## Registering component: ', name(target, config));
       m.component(name(target, config), componentConfig);
     },

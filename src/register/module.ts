@@ -1,4 +1,5 @@
-import { Dependencies, register } from '../ng';
+import { register } from '../ng';
+import { Dependencies } from '../common';
 
 
 export function Module(dependencies: Dependencies) {

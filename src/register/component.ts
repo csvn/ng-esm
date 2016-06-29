@@ -1,22 +1,11 @@
-import { BaseConfig, register } from '../ng';
+import { register } from '../ng';
+import { ComponentOptions } from '../common';
 
 
-export function Component(config: ComponentConfig) {
+export function Component(options: ComponentOptions) {
   return function(target: Function): void {
-    let componentConfig: angular.IComponentOptions = config;
+    options.controller = target;
 
-    componentConfig.controller = target;
-
-    register(target, config).component(componentConfig);
+    register(target, options).component(options);
   };
-}
-
-
-export interface ComponentConfig extends BaseConfig {
-  controllerAs?: string;
-  template?: string | Function;
-  templateUrl?: string | Function;
-  bindings?: {[binding: string]: string};
-  transclude?: boolean | {[slot: string]: string};
-  require?: {[controller: string]: string};
 }

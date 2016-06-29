@@ -2,21 +2,19 @@
   "name": "ng-esm",
   "version": "0.2.1",
   "description": "ES2015 modules and decorators with Angular 1",
-  "main": "dist/main.cjs.js",
-  "jsnext:main": "dist/main.es.js",
-  "typings": "dist/main.d.ts",
+  "main": "dist/main.js",
+  "jsnext:main": "dist/esm/main.js",
+  "typings": "dist/esm/main.d.ts",
   "files": [
     "dist",
     "example"
   ],
   "scripts": {
     "start": "run-p example:watch example:serve",
-    "example:watch": "rollup -w -c rollup.example.config.js",
+    "example:watch": "rollup -w -c",
     "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
-    "build": "rollup -c",
+    "build": "tsc -p . && tsc -d -p . -m es2015 --outDir dist/esm",
     "prebuild": "rimraf dist",
-    "postbuild": "tsc -p . -m system --outFile dist/main.js && rimraf dist/main.js dist/main.js.map",
-    "postinstall": "typings install",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -31,13 +29,13 @@
     "type": "git",
     "url": "https://github.com/csvn/ng-esm.git"
   },
-  "dependencies": {
-    "angular": "^1.5.7"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "angular": "^1.5.7",
     "angular-animate": "^1.5.7",
     "angular-aria": "^1.5.7",
     "angular-material": "^1.1.0-rc.5",
+    "angular-ui-router": "^0.3.1",
     "browser-sync": "^2.13.0",
     "ng-esm": "0.2.1",
     "npm-run-all": "^2.1.2",
