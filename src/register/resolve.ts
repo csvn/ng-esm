@@ -12,7 +12,7 @@ export interface Resolver {
   (...injectables: any[]): any | Promise<any>;
 }
 
-// For class decoration, needs to be before @State decorator
+// For class decoration
 export function Resolve(resolves: { [name: string]: Resolver }) {
   return function(target: Function | any): void {
     target[RESOLVES_SYMBOL] = resolves;

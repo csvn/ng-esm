@@ -23,12 +23,17 @@ const template = `
 @Component({ template })
 export default class Ticker {
   time: Number;
+  promise: ng.IPromise<any>;
 
   constructor(private $interval: ng.IIntervalService) {}
 
   $onInit() {
-    this.$interval(() => {
+    this.promise = this.$interval(() => {
       this.time = Date.now();
     }, 16);
+  }
+
+  $onDestroy() {
+    this.$interval.cancel(this.promise);
   }
 }

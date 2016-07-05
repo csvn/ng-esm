@@ -1,5 +1,5 @@
 import uiRouter from 'angular-ui-router';
-import { State } from 'ng-esm';
+import { State, resolve } from 'ng-esm';
 
 const template = `
   <h1>Filters demo</h1>
@@ -7,8 +7,8 @@ const template = `
   <md-divider></md-divider>
 
   <h3>Reverse filter</h3>
-  <p>{{ vm.reverseStr }}</p>
-  <p>{{ vm.reverseStr | reverse }}</p>
+  <p>{{ vm.reverseText }}</p>
+  <p>{{ vm.reverseText | reverse }}</p>
 
   <md-divider></md-divider>
 
@@ -24,5 +24,10 @@ const template = `
   dependencies: [uiRouter]
 })
 export default class FiltersView {
-  reverseStr = 'This string should be reversed!';
+  constructor(private reverseText: string) {}
+
+  @resolve
+  static reverseText() {
+    return 'This string should be reversed!';
+  }
 }
