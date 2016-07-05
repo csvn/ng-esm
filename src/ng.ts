@@ -1,8 +1,13 @@
 import { toCamel } from './case';
 import { BaseConfig, ComponentOptions } from './common';
 
+let config = {
+  ctrlAs: '$ctrl'
+};
+
 export {
   BaseConfig,
+  config,
   InjectFn,
   InjectConstructor,
   register
