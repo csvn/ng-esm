@@ -8,7 +8,7 @@ export function resolve(
   constructor[RESOLVES_SYMBOL][name] = descriptor.value;
 }
 
-interface Resolver {
+export interface Resolver {
   (...injectables: any[]): any | Promise<any>;
 }
 
