@@ -4,11 +4,13 @@
 
 ## Progress
 * Currently pre-alpha
-* Missing  `ng.Module` equivalents:
+* Missing `ng.Module` equivalents:
+    * animation
     * constant
     * value
     * decorator
     * factory
+    * provider
     * directive
     * controller
 * Create unit tests for every register method

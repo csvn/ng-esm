@@ -1,5 +1,5 @@
 import uiRouter from 'angular-ui-router';
-import { State } from 'ng-esm';
+import { State, resolve } from 'ng-esm';
 
 const template = `
   <h1>Components demo</h1>
@@ -15,4 +15,9 @@ const template = `
   template,
   dependencies: [uiRouter]
 })
-export default class ComponentView {}
+export default class ComponentView {
+  @resolve
+  static foo() {
+    return 'bar';
+  }
+}

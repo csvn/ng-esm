@@ -1,11 +1,17 @@
 import { register } from '../ng';
 import { StateOptions } from '../common';
+import { RESOLVES_SYMBOL } from './resolve';
 
 
 export function State(options: StateOptions) {
-  return function(target: Function): void {
+  return function(target: Function | any): void {
     function stateRunner($stateProvider: ng.ui.IStateProvider): void {
       options.controller = target;
+
+      if (target[RESOLVES_SYMBOL]) {
+        options.resolve = target[RESOLVES_SYMBOL];
+      }
+
       $stateProvider.state(options);
       console.log(options);
     }
