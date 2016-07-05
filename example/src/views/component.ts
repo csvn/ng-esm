@@ -6,22 +6,22 @@ const template = `
 
   <md-divider></md-divider>
 
+  "{{ $ctrl.foo }}" and "{{ $ctrl.bar }}"
+
   <ticker></ticker>
 `;
 
 
+@Resolve({
+  foo: () => 'fooo!',
+  bar: () => Promise.resolve('baaar!')
+})
 @State({
   name: 'components',
   url: '/components',
   template,
   dependencies: [uiRouter]
 })
-@Resolve({
-  foo: () => 'fooo!',
-  bar: () => Promise.resolve('baaar!')
-})
 export default class ComponentView {
-  constructor(foo: string, bar: string) {
-    console.log(foo, bar);
-  }
+  constructor(private foo: string, private bar: string) {}
 }
