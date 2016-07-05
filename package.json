@@ -13,7 +13,7 @@
     "start": "run-p example:watch example:serve",
     "example:watch": "tsc -w -p example",
     "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
-    "build": "tsc -p . && tsc -d -p . -m es2015 --outDir dist/esm",
+    "build": "tsc -p src && tsc -d -p src -m es2015 --outDir dist/esm",
     "prebuild": "rimraf dist",
     "prepublish": "typings install && npm run build"
   },

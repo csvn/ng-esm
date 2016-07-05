@@ -5,12 +5,12 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "dist",
+    "outDir": "../dist",
     "sourceMap": true,
     "noImplicitAny": true
   },
   "files": [
-    "src/main.ts",
-    "typings/index.d.ts"
+    "main.ts",
+    "../typings/index.d.ts"
   ]
 }
