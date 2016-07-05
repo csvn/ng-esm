@@ -1,0 +1,20 @@
+h1, h2, h3, h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2, h3 {
+  font-size: 24px;
+}
+
+h4, h5 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 16px;
+}
