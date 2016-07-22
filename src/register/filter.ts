@@ -1,8 +1,8 @@
-import { BaseConfig, register } from '../ng';
+import { BaseConfig, InjectConstructor, register } from '../ng';
 
 
 export function Filter(config?: BaseConfig) {
-  return function(target: FilterConstructor): void {
+  return function(target: InjectConstructor<FilterTransform>): void {
     function filterRunner($injector: ng.auto.IInjectorService): Function {
       let filter = $injector.instantiate<FilterTransform>(target);
 
@@ -21,8 +21,4 @@ export function Filter(config?: BaseConfig) {
 
 export interface FilterTransform {
   $transform(value: any, ...args: any[]): any;
-}
-
-export interface FilterConstructor {
-  new (...injectables: any[]): FilterTransform;
 }

@@ -14,6 +14,7 @@ export interface Resolver {
 
 // For class decoration
 export function Resolve(resolves: { [name: string]: Resolver }) {
+  // target requires type "any" due to symbol properties not being supported
   return function(target: Function | any): void {
     target[RESOLVES_SYMBOL] = resolves;
   };
