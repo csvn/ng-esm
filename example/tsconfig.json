@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "sourceMap": true,
+    "target": "es2015",
     "module": "system",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "outFile": "dist/main.js"
+    "outFile": "dist/main.js",
+    "sourceMap": true
   },
   "files": [
     "main.ts",
