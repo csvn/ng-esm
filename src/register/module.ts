@@ -1,9 +1,13 @@
 import { register } from '../ng';
-import { Dependencies } from '../common';
+import { BaseConfig, Dependencies } from '../common';
 
 
-export function Module(dependencies: Dependencies) {
+export function Module(config: BaseConfig | Dependencies) {
   return function(target: Function): void {
-    register(target, { dependencies }, true);
+    if (Array.isArray(config)) {
+      config = { dependencies: config };
+    }
+
+    register(target, config, true);
   };
 }
