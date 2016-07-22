@@ -3,10 +3,10 @@
     "target": "es2015",
     "module": "system",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "outFile": "dist/main.js",
-    "sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true
   },
   "files": [
     "main.ts",
