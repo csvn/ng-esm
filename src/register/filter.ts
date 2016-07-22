@@ -3,7 +3,7 @@ import { BaseConfig, register } from '../ng';
 
 export function Filter(config?: BaseConfig) {
   return function(target: FilterConstructor): void {
-    function filterRunner($injector: angular.auto.IInjectorService): Function {
+    function filterRunner($injector: ng.auto.IInjectorService): Function {
       let filter = $injector.instantiate<FilterTransform>(target);
 
       if (typeof filter.$transform !== 'function') {
