@@ -1,12 +1,12 @@
 import { toCamel } from './case';
 import { BaseConfig, ComponentOptions } from './common';
 
-let config = {
+
+let config: NgEsmConfig = {
   ctrlAs: '$ctrl'
 };
 
 export {
-  BaseConfig,
   config,
   InjectFn,
   InjectConstructor,
@@ -22,6 +22,10 @@ interface InjectFn {
 
 interface InjectConstructor<T> {
   new (...injectables: any[]): T;
+}
+
+interface NgEsmConfig {
+  ctrlAs: string | null;
 }
 
 
