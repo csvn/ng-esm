@@ -1,4 +1,5 @@
 import { Run, OnInit } from 'ng-esm';
+import { TransitionService } from 'angular-ui-router';
 
 export interface RootScope extends ng.IRootScopeService {
   currentState: string;
@@ -6,18 +7,15 @@ export interface RootScope extends ng.IRootScopeService {
 
 @Run()
 class Init implements OnInit {
-  constructor(private $rootScope: RootScope) {}
+  constructor(
+    private $rootScope: RootScope,
+    private $transitions: TransitionService
+  ) {}
 
   $onInit() {
-    let rs = this.$rootScope;
-
-    rs.$on('$stateChangeSuccess', (e, to: ng.ui.IState) =>
-      rs.currentState = to.name
-    );
-
-    rs.$on('$stateChangeError', (e, to, params, from: ng.ui.IState) =>
-      rs.currentState = from.name
-    );
+    this.$transitions.onSuccess({}, t => {
+      this.$rootScope.currentState = t.$to().name;
+    });
   }
 }
 
