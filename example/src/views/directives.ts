@@ -1,3 +1,4 @@
+import ng from 'angular';
 import { State } from 'ng-esm';
 
 const template = `
@@ -5,7 +6,9 @@ const template = `
 
   <md-divider></md-divider>
 
-  <div>This is a &lt;div&gt; with * directive!</div>
+  <div model ng-model="$ctrl.test">
+    This is a &lt;div&gt; with "model" directive! ({{ $ctrl.test }})
+  </div>
 `;
 
 
@@ -15,5 +18,11 @@ const template = `
   template
 })
 export default class DirectiveView {
-  constructor() {}
+  test = 1;
+
+  constructor(private $interval: ng.IIntervalService) {}
+
+  $onInit() {
+    this.$interval(() => this.test++, 300);
+  }
 }

@@ -1,6 +1,16 @@
-import { Filter } from 'ng-esm';
+import ng from 'angular';
+import { Directive } from 'ng-esm';
 
-@Filter()
-export default class MyFilter {
-  transform() {}
+@Directive({
+  restrict: 'A',
+  require: { ngModel: 'ngModel' },
+  scope: {},
+  bindToController: true
+})
+export default class Model {
+  ngModel: ng.INgModelController;
+
+  $onInit() {
+    this.ngModel.$formatters.push(v => console.log(`"model" updated; ${v}!`));
+  }
 }
