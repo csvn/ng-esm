@@ -22,7 +22,7 @@ export const config: NgEsmConfig = {
 
 
 const ID_SYMBOL = Symbol('moduleId');
-let currentModuleIndex = 1;
+let currentModuleIndex = 0;
 
 export function name(target: Function, { name = target.name }: BaseConfig) {
   if (!name) {
