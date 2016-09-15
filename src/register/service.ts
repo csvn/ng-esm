@@ -1,8 +1,10 @@
-import { BaseConfig, InjectConstructor, register } from '../ng';
+import { BaseConfig } from '../common';
+import { InjectConstructor, name, createModule } from '../ng';
 
 
-export function Service(config?: BaseConfig) {
+export function Service(config: BaseConfig = {}) {
   return function(target: InjectConstructor<any>): void {
-    register(target, config).service(target);
+    createModule(target, config.dependencies)
+      .service(name(target, config), target);
   };
 }

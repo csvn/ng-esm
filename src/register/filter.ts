@@ -1,24 +1,27 @@
-import { BaseConfig, InjectConstructor, register } from '../ng';
+import ng from 'angular';
+import { InjectConstructor, createModule } from '../ng';
+import { BaseConfig } from '../common';
 
 
-export function Filter(config?: BaseConfig) {
+export function Filter(config: BaseConfig = {}) {
   return function(target: InjectConstructor<FilterTransform>): void {
     function filterRunner($injector: ng.auto.IInjectorService): Function {
       let filter = $injector.instantiate<FilterTransform>(target);
 
-      if (typeof filter.$transform !== 'function') {
-        throw new Error('"$transform" method required for Filter class');
+      if (typeof filter.transform !== 'function') {
+        throw new Error('"transform" method required for Filter class');
       }
 
-      return filter.$transform.bind(filter);
+      return filter.transform.bind(filter);
     }
-
     filterRunner.$inject = ['$injector'];
-    register(target, config).filter(filterRunner);
+
+    createModule(target, config.dependencies)
+      .filter(filterRunner);
   };
 }
 
 
 export interface FilterTransform {
-  $transform(value: any, ...args: any[]): any;
+  transform(value: any, ...args: any[]): any;
 }

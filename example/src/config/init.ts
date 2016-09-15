@@ -1,3 +1,4 @@
+import ng from 'angular';
 import { Run, OnInit } from 'ng-esm';
 import { TransitionService } from 'angular-ui-router';
 

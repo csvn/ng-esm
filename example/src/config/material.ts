@@ -1,3 +1,4 @@
+import ng from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import { Config, OnInit } from 'ng-esm';

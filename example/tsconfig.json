@@ -5,11 +5,8 @@
     "moduleResolution": "node",
     "outFile": "dist/main.js",
     "sourceMap": true,
+    "skipLibCheck": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true
-  },
-  "files": [
-    "main.ts",
-    "../typings/index.d.ts"
-  ]
+  }
 }

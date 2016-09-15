@@ -3,6 +3,7 @@
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "outDir": "../dist",
     "sourceMap": true,
     "skipLibCheck": true,
@@ -12,9 +13,5 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "strictNullChecks": true
-  },
-  "files": [
-    "main.ts",
-    "../typings/index.d.ts"
-  ]
+  }
 }

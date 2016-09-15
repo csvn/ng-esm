@@ -1,4 +1,5 @@
-import { InjectConstructor, register } from '../ng';
+import ng from 'angular';
+import { InjectConstructor, createModule } from '../ng';
 import { Dependencies, OnInit } from '../common';
 
 
@@ -7,8 +8,9 @@ export function Run(dependencies?: Dependencies) {
     function runRunner($injector: ng.auto.IInjectorService): void {
       $injector.invoke(target).$onInit();
     }
-
     runRunner.$inject = ['$injector'];
-    register(target, { dependencies }).run(runRunner);
+
+    createModule(target, dependencies)
+      .run(runRunner);
   };
 }

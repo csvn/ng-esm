@@ -1,4 +1,5 @@
-import { config, register } from '../ng';
+import { toCamel } from '../case';
+import { config, name, createModule } from '../ng';
 import { ComponentOptions } from '../common';
 
 
@@ -7,6 +8,7 @@ export function Component(options: ComponentOptions) {
     options.controller = target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
 
-    register(target, options).component(options);
+    createModule(target, options.dependencies)
+      .component(toCamel(name(target, options)), options);
   };
 }
