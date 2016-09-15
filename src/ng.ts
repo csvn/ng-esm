@@ -38,7 +38,6 @@ export function createModule(
   let ngDeps = parseDependencies(deps),
       ngModule = angular.module(moduleId, ngDeps);
 
-  console.log(`## Declaring module ${moduleId}: `, ngDeps);
   Reflect.defineProperty(target, ID_SYMBOL, { value: moduleId });
 
   return ngModule;
