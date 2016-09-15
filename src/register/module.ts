@@ -4,22 +4,20 @@ import { BaseConfig, Dependencies } from '../common';
 
 declare const angular: ng.IAngularStatic;
 
-export type NgModuleDeclaration = Function & NgModuleRegistration;
-
 export interface NgModuleRegistration {
-  register?(ngModule: ng.IModule): void;
+  register(ngModule: ng.IModule): void;
 }
 
 export function NgModule(config: BaseConfig | Dependencies) {
-  return function(target: NgModuleDeclaration): void {
+  return function(target: Function | (Function & NgModuleRegistration)): void {
     if (Array.isArray(config)) {
       config = { dependencies: config };
     }
 
     let ngModule = createModule(target, config.dependencies, name(target, config));
 
-    if (angular.isFunction(target.register)) {
-      target.register(ngModule);
+    if (angular.isFunction((<NgModuleRegistration>target).register)) {
+      (<NgModuleRegistration>target).register(ngModule);
     }
   };
 }
