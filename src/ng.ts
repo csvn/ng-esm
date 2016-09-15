@@ -22,6 +22,7 @@ export const config: NgEsmConfig = {
 
 
 const ID_SYMBOL = Symbol('moduleId');
+let currentModuleIndex = 1;
 
 export function name(target: Function, { name = target.name }: BaseConfig) {
   if (!name) {
@@ -45,7 +46,8 @@ export function createModule(
 
 
 function generateId() {
-  return `ng-esm:${Math.random()}`;
+  currentModuleIndex++;
+  return `ng-esm:${currentModuleIndex}`;
 }
 
 function getModuleId({ [ID_SYMBOL]: moduleId }): string {
