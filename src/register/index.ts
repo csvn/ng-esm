@@ -1,5 +1,6 @@
 export * from './component';
 export * from './config';
+export * from './directive';
 export * from './filter';
 export * from './module';
 export * from './resolve';
