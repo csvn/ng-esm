@@ -4,13 +4,14 @@ import { BaseConfig, Dependencies } from '../common';
 
 declare const angular: ng.IAngularStatic;
 
+export type NgModuleDeclaration = Function & NgModuleRegistration;
+
 export interface NgModuleRegistration {
-  new (): any;
   register?(ngModule: ng.IModule): void;
 }
 
 export function NgModule(config: BaseConfig | Dependencies) {
-  return function(target: NgModuleRegistration): void {
+  return function(target: NgModuleDeclaration): void {
     if (Array.isArray(config)) {
       config = { dependencies: config };
     }
