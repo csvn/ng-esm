@@ -1,5 +1,6 @@
 import ng from 'angular';
-import { InjectConstructor, createModule } from '../ng';
+import { toCamel } from '../case';
+import { InjectConstructor, name, createModule } from '../ng';
 import { BaseConfig } from '../common';
 
 
@@ -17,7 +18,7 @@ export function Filter(config: BaseConfig = {}) {
     filterRunner.$inject = ['$injector'];
 
     createModule(target, config.dependencies)
-      .filter(filterRunner);
+      .filter(toCamel(name(target, config)), filterRunner);
   };
 }
 
