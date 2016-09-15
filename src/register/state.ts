@@ -19,7 +19,9 @@ export function State(options: StateOptions) {
     options.controller = target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
     options.dependencies = options.dependencies || [];
-    options.dependencies.push(UI_ROUTER);
+    if (options.dependencies.indexOf(UI_ROUTER) < 0) {
+      options.dependencies.push(UI_ROUTER);
+    }
 
     createModule(target, options.dependencies)
       .config(stateRunner);
