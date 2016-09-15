@@ -14,6 +14,8 @@ export interface BaseConfig {
 
 export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {}
 
+export interface DirectiveOptions extends BaseConfig, ng.IDirective {}
+
 export interface StateOptions extends BaseConfig, Ng1StateDeclaration {
   name: string;
 }
