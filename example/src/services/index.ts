@@ -1,4 +1,4 @@
-import { Module } from 'ng-esm';
+import { NgModule } from 'ng-esm';
 
-@Module([])
+@NgModule([])
 export default class Services {}

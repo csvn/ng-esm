@@ -2,7 +2,7 @@ import { Filter, FilterTransform } from 'ng-esm';
 
 @Filter({})
 export default class Lorem implements FilterTransform {
-  $transform(): string {
+  transform(): string {
     return `
       Lorem ipsum dolor sit amet, hasta la vista baby-cakes!
       Mr. Ipsum has now left the base. Feel free to skip reading this.

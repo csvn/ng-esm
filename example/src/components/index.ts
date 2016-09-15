@@ -1,6 +1,6 @@
-import { Module } from 'ng-esm';
+import { NgModule } from 'ng-esm';
 
 import ticker from './ticker';
 
-@Module([ticker])
+@NgModule([ticker])
 export default class Components {}
