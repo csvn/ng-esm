@@ -1,120 +1,373 @@
 # ng-esm
 
-> ES2015 modules and decorators with Angular 1
+> ES2015 modules and decorators with Angular 1, complete with Typescript definition files
 
-## Progress
-* Currently pre-alpha
-* Missing `ng.Module` equivalents:
-    * animation
-    * constant
-    * value
-    * decorator
-    * factory
-    * provider
-    * directive
-    * controller
-* Create unit tests for every register method
-* Iteration and "Eat your own dog food" to improve the API
-* Documentation
+1. [Current progress](#current-progress)
+2. [Motivation](#motivation)
+3. [Goals](#goals)
+4. [Usage](#usage)
+    * [NgModule](#ngmodule)
+    * [Component](#component)
+    * [Directive](#directive)
+    * [Filter](#filter)
+    * [Service](#service)
+    * [Factory](#factory)
+    * [Provider](#provider)
+    * [Config/Run](#configrun)
+    * [State](#state)
+    * [miscellaneous stuff](#miscellaneous-stuff)
+
+## Current progress
+* Currently beta-like state
+* Documentation is not great
+* Unit tests are not yet implemented (only example usage)
 
 ## Motivation
 
 Angular is awesome. The module system in Angular 1 when using es2015 import/export statements is... not as awesome. It typically results in a lot of extra wiring code and boilerplate.
 
-It's possible to just create one angular module, and stick every directive, component, service and whatnot on that module. One drawback to this can be when a piece of code need to be tested in isolation (e.g. a config function unaffected by other config functions).
-
-Another solution is to create a new module for every file and component/service/filter/etc. This means every piece of code can easier specify it's own dependencies and be tested on it's own. This options means a lot of extra boilerplate for every file.
-
-
-## Goal
-
-Provide an easy way to register different angular components using modern Javascript (decorators), so you never need to create angular modules directly, and reduce the amount of code.
-
-This project also uses TypeScript, so hopefully we can create a great experience with IntelliSense for those using this package.
-
-It is *not* a primary goal to make it easier to migrate to Angular 2, but when possible we'll try to match concepts from it. Trying to abstract away modules and hopefully increasing speed and producing cleaner code is the main focus.
-
-Let's get to the good stuff!
-
-
-## Overview
-
-### Component
-
-The regular non-es2015 way:
 ```javascript
-class MyComponentCtrl {
-  $onInit() {}
-}
+//# some.component.js
+import angular from 'angular'; // avoiding globals
 
 export default angular
-  .module('myComponent', [])
-  .component('myComponent', {
-    controllerAs: 'vm',
-    controller: MyComponentCtrl,
-    template: '<p>Foo!</p>'
-  })
+  .module('is-this-really-needed?', [])
+  .component(/* settings */)
+  .name;
+
+//# some.module.js
+import angular from 'angular';
+import someComponent from './some.component';
+
+angular.module('might-be-needed', [someComponent]);
+```
+
+It's not uncommon for developers to want to avoid using globals. This results in importing "angular" in every file that want to register a component or service.
+
+```javascript
+import ng from 'angular';
+```
+
+It's also not uncommon to want to avoid duplicating magical angular module strings everywhere, which means we want to export the module name to avoid referring to it directly.
+
+```javascript
+export default angular
+  .module('is-this-really-needed?', [])
+  .component(/* settings */)
   .name;
 ```
 
-With **ng-esm** and ES2015+decorators
+It's possible to just create one angular module, and stick every directive, component, service and whatnot on that module. One drawback to this can be when a piece of code need to be tested in isolation (e.g. a config function unaffected by other config functions).
+
+
+## Goals
+
+* Conveniently decorate class as e.g. component/service, to reduce boilerplate
+
+* Allow classes as dependencies to skip string module name exports
+
+* Provide excellent tooling support via Typescript
+
+* Match Angular2 syntax where it makes sense. Decorators already increase similarity to ng2
+
+## Usage
+
+### Example
+
 ```javascript
+// greeter.service.js
+import { Service } from 'ng-esm';
+
+const greeters = new Set();
+
+@Service()
+export class GreeterService {
+  sayHello(name) {
+    for (let greeter of greeters) {
+      greeter.greet(name);
+    }
+  }
+  register(greeterComponent) {
+    greeters.add(greeterComponent);
+  }
+  unregister(greeterComponent) {
+    greeters.delete(greeterComponent)
+  }
+}
+```
+
+```javascript
+// greeter.component.js
+import { Component } from 'ng-esm';
+import { GreeterService } from './greeter.service';
+
 @Component({
-  controllerAs: 'vm',
-  template: '<p>Foo!</p>'
+  dependencies: [GreeterService]
+  bindings: {
+    greeting: '@'
+  },
+  template: '<p>{{ $ctrl.greeting }} {{ $ctrl.name }}</p>'
 })
-export default class MyComponent {
+export class MyGreeter {
+  constructor(GreeterService) {
+    this.name = 'John Doe';
+    this.GreeterService = GreeterService;
+  }
+  $onInit() {
+    this.GreeterService.register(this);
+  }
+  $onDestroy() {
+    this.GreeterService.unregister(this);
+  }
+  greet(name) {
+    this.name = name;
+  }
+}
+```
+
+```javascript
+// greeter.module.js
+import { NgModule } from 'ng-esm';
+import { MyGreeter } from './greeter.component';
+
+@NgModule('greeter', [MyGreeter])
+class Greeter {}
+```
+
+If we would add `greeter` as a dependency to an angular module, we could then use `<my-greeter greeting="Hello"></my-greeter>` to create a component, and the `GreeterService.sayHello('Gabe')` to make all greeter components say hello.
+
+
+### NgModule
+
+```javascript
+import { NgModule, ngModule } from 'ng-esm';
+
+@NgModule([/* string/decorated-class dependencies */])
+class Sauce {}
+// module name: Sauce
+
+@NgModule('awesome', [/* string/decorated-class dependencies */])
+class Sauce {}
+// module name: awesome
+
+@NgModule({
+  // all options are optional
+  name: 'sweet',
+  dependencies: [/* string/decorated-class dependencies */],
+  values: {
+    myVal: 'available to DI as "myVal"'
+  },
+  constants: {
+    myConst: 'available to DI as "myConst"'
+  }
+})
+class Sauce {}
+// module name: sweet
+
+
+// useful for seldom used api's, e.g. animation, decorator
+// create a new angular module with generated name
+ngModule();
+// specify name
+ngModule('myModule');
+// specify dependencies (generated name)
+ngModule(null, []);
+// or both
+ngModule('anotherModule', []);
+```
+
+
+### Component
+
+```javascript
+import { Component } from 'ng-esm';
+
+@Component({
+  name: 'myGreeter', // optional, camelCased class-name when missing
+  dependencies: [], // optional, decorated classes or strings
+
+  template: '<p>Hello world!</p>'
+  // All `angular.module().component()` settings allowed
+})
+export class MyGreeter {
   $onInit() {}
 }
 ```
 
-> A property `name` can be provided in the `@Component` config, which will be used as the component name. The class' name will be used as component name if `name` property is missing. kebab-case and PascalCase will be converted to camelCase (e.g. "my-component" and "MyComponent" will both become "myComponent" and thus "<my-component>" in html.
+### Directive
 
-> If a component has dependencies on other modules, a `dependencies` property can be specified as `(string | Function)[]`. Function work only if they are classes decorated with **ng-esm** (e.g. other `@Component`'s, `@Filter`'s, `@Service`'s etc).
+It's only practical to use this decorator if the directive uses a controller, and not compile/link with dependency injection.
 
-### Module
-
-I know we wanted to avoid Angular's modules, but sometimes it can be nice to group up a bunch of registered parts into a named module. It could be for a third party module, or simply exporting all `@Component`'s in a folder.
-
-**header.component.js**
 ```javascript
-import { Component } from 'ng-esm';
+import { Directive } from 'ng-esm';
 
-@Component({ templateUrl: '/header.component.html' })
-export default class MyHeader {}
+@Directive({
+  name: 'myDirective', // optional, camelCased class-name when missing
+  dependencies: [], // optional, decorated classes or strings
+  bindToController: true,
+  scope: {},
+  restrict: 'A',
+  require: {
+    model: 'ngModel'
+  }
+  // All `angular.module().directive() settings allowed
+})
+export class MyDirectiveCtrl {
+  constructor($element) {
+    this.$element = $element;
+  }
+
+  $onInit() {
+    this.model.parsers.push(v => !v);
+  }
+}
 ```
 
-**sidebar.component.js**
-```javascript
-import { Component } from 'ng-esm';
+### Filter
 
-@Component({ templateUrl: '/sidebar.component.html' })
-export default class MySidebar {}
+```typescript
+// Typescript example
+import { Filter, FilterTransform } from 'ng-esm';
+
+@Filter({
+  name: 'percent', // optional, camelCased class name when missing
+  dependencies: [] // optional, decorated classes or strings
+})
+export class PercentFilter implements FilterTransform {
+  constructor(/* Injectables */) {}
+
+  transform(value: number, decimals: number = 2) {
+    return `${value.toFixed(decimals)} %`;
+  }
+}
 ```
 
-> Under the hood, both of the above components will be created in their own modules, with a random module ID. They can only become available when their classes are added to a module (or a dependency to other component/filter/etc).
+### Service
 
-**components.module.js**
 ```javascript
-import header from './header.component';
-import sidebar from './sidebar.component';
+import { Service } from 'ng-esm';
 
-export default Module('components', [
-  header,
-  sidebar
-]);
+@Service({
+  name: 'myService', // optional, class name when missing
+  dependencies: [] // optional, decorated classes or strings
+})
+export class MyService {
+  constructor(/* Injectables */) {}
+
+  serviceMethod() {}
+}
 ```
 
-In the above example, an ng-module will be created with the name `"components"`, that can be used normally as a dependency in other modules/components, or bootstrapped with Angular.
+### Factory
 
------------------------------------------------------------
+```typescript
+import { Factory, ServiceFactory } from 'ng-esm';
 
-## License
-The MIT License (MIT)
-Copyright (c) 2016 Christian Svensson <csvn.dev@gmail.com>
+@Factory({
+  name: 'myFactory', // optional, class name when missing
+  dependencies: [] // optional, decorated classes or strings
+})
+export class MyFactory implements ServiceFactory {
+  constructor(/* Injectables */) {}
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  $onInit() {
+    // setup
+  }
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  create(): any {
+    return {};
+  }
+}
+```
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+### Provider
+
+```typescript
+import { Provider, ServiceProvider } from 'ng-esm';
+
+@Provider({
+  name: 'myFactory', // optional, class name when missing
+  dependencies: [] // optional, decorated classes or strings
+})
+class MyProvider implements ServiceProvider {
+  constructor(/* Injectables */) {}
+
+  $get(/* Injectables */): any {
+    return 'my-new-service';
+  }
+}
+```
+
+### Config/Run
+
+```typescript
+// Typescript example
+import { Run, Config, OnInit } from 'ng-esm';
+
+@Run([/* string/decorated-class dependencies */])
+export class SetupStuff implements OnInit {
+  constructor(private someService) {}
+
+  $onInit() {
+    this.someService.doSomething();
+  }
+}
+
+@Config([/* string/decorated-class dependencies */])
+export class SetupMoreStuff implements OnInit {
+  constructor(private someProvider) {}
+
+  $onInit() {
+    this.someProvider.doSomethingElse();
+  }
+}
+```
+
+### State
+
+```javascript
+import { State, resolve, Resolve } from 'ng-esm';
+
+@Resolve({ aNumber: () => 123 })
+@State({
+  /*
+    regular ui-router state configuration
+    `controller` is not needed, as the decorated class is used
+  */
+  name: 'app.contacts',
+  url: '/contacts',
+  template: '<p>Foo!</p>'
+})
+export class ContactsController {
+  constructor(aNumber) {}
+}
+
+@State({
+  name: 'app.contacts.detail'
+})
+export class ContactsDetailController {
+  constructor(aBool) {}
+
+  @resolve
+  static aBool() {
+    return true;
+  }
+}
+```
+
+### miscellaneous stuff
+
+```javascript
+import { controllerAs, getNgModule, getModuleIds } from 'ng-esm';
+
+// Set the default "controllerAs" name for component/directive/state
+controllerAs('vm');
+
+// Fetch an angular module for string or decorated class
+getNgModule('app.contacts');
+
+// Returns an array of strings with all registered angular modules ids
+getModuleIds();
+```
+
+> **Note**: controllerAs() should be set before any controllers are registered. Also don't forget to load this option for unit tests. Set this option in a module loaded right after angular for both tests and app code.
