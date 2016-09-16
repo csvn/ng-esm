@@ -6,7 +6,7 @@ import { Dependencies, OnInit } from '../common';
 export function Config(dependencies?: Dependencies) {
   return function(target: InjectConstructor<OnInit>): void {
     function configRunner($injector: ng.auto.IInjectorService): void {
-      $injector.invoke(target).$onInit();
+      $injector.instantiate<OnInit>(target).$onInit();
     }
     configRunner.$inject = ['$injector'];
 
