@@ -11,8 +11,7 @@
     * [Directive](#directive)
     * [Filter](#filter)
     * [Service](#service)
-    * [Factory](#factory)
-    * [Provider](#provider)
+    * [Factory/Provider](#factoryprovider)
     * [Config/Run](#configrun)
     * [State](#state)
     * [miscellaneous stuff](#miscellaneous-stuff)
@@ -258,45 +257,30 @@ export class MyService {
 }
 ```
 
-### Factory
+### Factory/Provider
 
 ```typescript
-import { Factory, ServiceFactory } from 'ng-esm';
+import { Factory, Provider, FactoryCreator } from 'ng-esm';
+
+// @Factory and @Provider has identical signatures for both decorator and class
 
 @Factory({
   name: 'myFactory', // optional, class name when missing
   dependencies: [] // optional, decorated classes or strings
 })
-export class MyFactory implements ServiceFactory {
-  constructor(/* Injectables */) {}
-
-  $onInit() {
-    // setup
-  }
-
-  create(): any {
-    return {};
-  }
-}
-```
-
-### Provider
-
-```typescript
-import { Provider, ServiceProvider } from 'ng-esm';
-
-@Provider({
-  name: 'myFactory', // optional, class name when missing
-  dependencies: [] // optional, decorated classes or strings
-})
-class MyProvider implements ServiceProvider {
+export class MyFactory implements FactoryCreator {
   constructor(/* Injectables */) {}
 
   $get(/* Injectables */): any {
-    return 'my-new-service';
+    // Return an instance of the service
+    return {};
   }
+
+  // `@Provider()` may have additional methods for configuring the service during the config phase
 }
 ```
+
+> **Note:** When using `@Provider()`, only constants may be available to inject. This is due to angulars lifecycle.
 
 ### Config/Run
 
