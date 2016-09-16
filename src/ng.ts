@@ -42,7 +42,7 @@ export function createModule(
 
   registerModuleId(ngId);
   if (angular.isFunction(target)) {
-    Reflect.defineProperty(target, ID_SYMBOL, { value: name });
+    Reflect.defineProperty(target, ID_SYMBOL, { value: ngId });
   }
 
   return ngModule;
