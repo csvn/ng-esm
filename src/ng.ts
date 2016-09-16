@@ -34,17 +34,25 @@ export function name(target: Function, { name = target.name }: BaseConfig) {
 }
 
 export function createModule(
-  target: Function, deps: Dependencies = [], moduleId: string = generateId()
+  target?: null | Function, deps: Dependencies = [], moduleId: string = generateId()
 ) {
   let ngDeps = parseDependencies(deps),
       ngModule = angular.module(moduleId, ngDeps);
 
   registerModuleId(moduleId);
-  Reflect.defineProperty(target, ID_SYMBOL, { value: moduleId });
+  if (angular.isFunction(target)) {
+    Reflect.defineProperty(target, ID_SYMBOL, { value: moduleId });
+  }
 
   return ngModule;
 }
 
+/** Create a new angular module, where name will be automatically generated if not provided */
+export function ngModule(name?: string | undefined) {
+  return createModule(null, [], name);
+}
+
+/** Retrieve a angular module from a string or decorated class/function */
 export function getNgModule(value: string | Function) {
   return angular.module(getModuleId(value));
 }
