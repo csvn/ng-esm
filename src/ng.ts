@@ -45,6 +45,10 @@ export function createModule(
   return ngModule;
 }
 
+export function getNgModule(value: string | Function) {
+  return angular.module(getModuleId(value));
+}
+
 
 function generateId() {
   currentModuleIndex++;

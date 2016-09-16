@@ -1,12 +1,6 @@
-import ng from 'angular';
 import { name, createModule } from '../ng';
 import { BaseConfig, Dependencies } from '../common';
 
-declare const angular: ng.IAngularStatic;
-
-export interface NgModuleRegistration {
-  register(ngModule: ng.IModule): void;
-}
 
 export interface NgModuleSignature {
   (): Function;
@@ -19,7 +13,7 @@ export const NgModule: NgModuleSignature = NgModuleDecorator;
 
 
 function NgModuleDecorator(val: string | Dependencies | BaseConfig = {}, deps: Dependencies = []) {
-  return function(target: Function | (Function & NgModuleRegistration)): void {
+  return function(target: Function): void {
     let config: BaseConfig;
 
     if (Array.isArray(val)) {
@@ -30,10 +24,6 @@ function NgModuleDecorator(val: string | Dependencies | BaseConfig = {}, deps: D
       config = val;
     }
 
-    let ngModule = createModule(target, config.dependencies, name(target, config));
-
-    if (angular.isFunction((<NgModuleRegistration>target).register)) {
-      (<NgModuleRegistration>target).register(ngModule);
-    }
+    createModule(target, config.dependencies, name(target, config));
   };
 }
