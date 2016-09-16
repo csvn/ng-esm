@@ -1,10 +1,20 @@
-import { StateProvider } from 'angular-ui-router';
+import { StateProvider, Ng1StateDeclaration } from 'angular-ui-router';
 import { config, createModule } from '../ng';
-import { StateOptions } from '../common';
+import { BaseConfig } from '../common';
 import { RESOLVES_SYMBOL } from './resolve';
 
 const UI_ROUTER = 'ui.router';
 
+/**
+ * UI-router state declaration. [More information on the docs](
+ * https://ui-router.github.io/docs/latest/interfaces/ng1.ng1statedeclaration.html)
+ */
+export interface StateOptions extends BaseConfig, Ng1StateDeclaration {
+  /** The ui-router state name */
+  name: string;
+}
+
+/** Decorate a class (controller) as a new state. TODO: support for simultaneous `@Component()` */
 export function State(options: StateOptions) {
   return function(target: Function | any): void {
     function stateRunner($stateProvider: StateProvider): void {

@@ -1,17 +1,28 @@
 import ng from 'angular';
 import { name, createModule } from '../ng';
-import { ModuleOptions, Dependencies } from '../common';
+import { BaseConfig, Dependencies } from '../common';
 
 
 declare const angular: ng.IAngularStatic;
 
-export interface NgModuleSignature {
-  (): Function;
-  (config: ModuleOptions): Function;
-  (moduleId: string): Function;
-  (moduleId: string, dependencies?: Dependencies): Function;
+/** Used for `@NgModule()` decorator. Option bag variant of `angular.module()` */
+export interface ModuleOptions extends BaseConfig {
+  /** The name of the ng module. If not provided, the class name will be used instead */
+  name?: string;
+  /** Register these key/value pairs as a value in angular */
+  values?: { [name: string]: any };
+  /** Register these key/value pairs as a constant in angular */
+  constants?: { [name: string]: any };
 }
 
+/** Signature for `@NgModule()` */
+export interface NgModuleSignature {
+  (config: ModuleOptions): Function;
+  (dependencies: Dependencies): Function;
+  (moduleId: string, dependencies: Dependencies): Function;
+}
+
+/** Decorate a class as being an angular module */
 export const NgModule: NgModuleSignature = ModuleDecorator;
 
 

@@ -3,6 +3,7 @@ import { InjectConstructor, createModule } from '../ng';
 import { Dependencies, OnInit } from '../common';
 
 
+/** Decorate a class for `ng.module().run()`. The class must implement `OnInit` interface */
 export function Run(dependencies?: Dependencies) {
   return function(target: InjectConstructor<OnInit>): void {
     function runRunner($injector: ng.auto.IInjectorService): void {
