@@ -8,7 +8,7 @@ export interface NgModuleRegistration {
   register(ngModule: ng.IModule): void;
 }
 
-interface NgModuleSignature {
+export interface NgModuleSignature {
   (): Function;
   (config: BaseConfig): Function;
   (moduleId: string): Function;
