@@ -1,5 +1,6 @@
 import ng from 'angular';
 import { Dependencies, BaseConfig } from './common';
+import { registerModuleId } from './debug';
 
 
 declare let angular: ng.IAngularStatic;
@@ -38,6 +39,7 @@ export function createModule(
   let ngDeps = parseDependencies(deps),
       ngModule = angular.module(moduleId, ngDeps);
 
+  registerModuleId(moduleId);
   Reflect.defineProperty(target, ID_SYMBOL, { value: moduleId });
 
   return ngModule;
