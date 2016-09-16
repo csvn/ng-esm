@@ -1,4 +1,4 @@
-import { InjectConstructor, createModule } from '../ng';
+import { name, InjectConstructor, createModule } from '../ng';
 import { BaseConfig, FactoryCreator } from '../common';
 
 
