@@ -14,7 +14,7 @@ export function NgModule(config: BaseConfig | Dependencies) {
       config = { dependencies: config };
     }
 
-    let ngModule = createModule(target, config.dependencies, name(target, config));
+    let ngModule = createModule(target, config.dependencies, name(target, config, false));
 
     if (angular.isFunction((<NgModuleRegistration>target).register)) {
       (<NgModuleRegistration>target).register(ngModule);

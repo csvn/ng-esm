@@ -24,8 +24,8 @@ export const config: NgEsmConfig = {
 const ID_SYMBOL = Symbol('moduleId');
 let currentModuleIndex = 0;
 
-export function name(target: Function, { name = target.name }: BaseConfig) {
-  if (!name) {
+export function name(target: Function, { name = target.name }: BaseConfig, required = true) {
+  if (!name && required) {
     throw new Error(`Must provide named class, or 'name' property in config`);
   }
 
