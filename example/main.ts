@@ -1,6 +1,7 @@
 import './vendor';
+import './config';
 import ng from 'angular';
-import { NgModule } from 'ng-esm';
+import { NgModule, getModuleIds, controllerAs } from 'ng-esm';
 
 import components from './src/components';
 import config from './src/config';
@@ -17,3 +18,5 @@ class App {
     module.constant('constant', 'Const val!');
   }
 }
+
+console.info('Registered angular modules: ', getModuleIds());

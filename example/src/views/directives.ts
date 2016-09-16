@@ -6,8 +6,8 @@ const template = `
 
   <md-divider></md-divider>
 
-  <div model ng-model="$ctrl.test">
-    This is a &lt;div&gt; with "model" directive! ({{ $ctrl.test }})
+  <div model ng-model="vm.test">
+    This is a &lt;div&gt; with "model" directive! ({{ vm.test }})
   </div>
 `;
 

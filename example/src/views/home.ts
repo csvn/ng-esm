@@ -6,8 +6,8 @@ const template = `
   <p>Check the source code for this example for some
     tips on how to use <code>ng-esm</code>.</p>
   <h3>Some values</h3>
-  <pre>global: {{ $ctrl.global }}
-constant: {{ $ctrl.constant }}</pre>
+  <pre>global: {{ vm.global }}
+constant: {{ vm.constant }}</pre>
 `;
 
 @State({

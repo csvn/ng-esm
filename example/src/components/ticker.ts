@@ -12,10 +12,10 @@ const template = `
     </md-card-header>
     <md-divider></md-divider>
     <md-card-content class="md-display-1">
-      {{ $ctrl.time | date:'longDate' }}
+      {{ vm.time | date:'longDate' }}
     </md-card-content>
     <md-card-content class="md-display-3">
-      {{ $ctrl.time | date:'HH:mm:ss.sss' }}
+      {{ vm.time | date:'HH:mm:ss.sss' }}
     </md-card-content>
   </md-card>
 `;

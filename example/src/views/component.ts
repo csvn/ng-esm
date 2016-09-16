@@ -6,7 +6,7 @@ const template = `
 
   <md-divider></md-divider>
 
-  "{{ $ctrl.foo }}" and "{{ $ctrl.bar }}"
+  "{{ vm.foo }}" and "{{ vm.bar }}"
 
   <ticker></ticker>
 `;
