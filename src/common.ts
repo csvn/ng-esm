@@ -12,6 +12,11 @@ export interface BaseConfig {
   dependencies?: Dependencies;
 }
 
+export interface ModuleOptions extends BaseConfig {
+  values?: { [name: string]: any };
+  constants?: { [name: string]: any };
+}
+
 export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {}
 
 export interface DirectiveOptions extends BaseConfig, ng.IDirective {}

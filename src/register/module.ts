@@ -1,20 +1,23 @@
+import ng from 'angular';
 import { name, createModule } from '../ng';
-import { BaseConfig, Dependencies } from '../common';
+import { ModuleOptions, Dependencies } from '../common';
 
+
+declare const angular: ng.IAngularStatic;
 
 export interface NgModuleSignature {
   (): Function;
-  (config: BaseConfig): Function;
+  (config: ModuleOptions): Function;
   (moduleId: string): Function;
   (moduleId: string, dependencies?: Dependencies): Function;
 }
 
-export const NgModule: NgModuleSignature = NgModuleDecorator;
+export const NgModule: NgModuleSignature = ModuleDecorator;
 
 
-function NgModuleDecorator(val: string | Dependencies | BaseConfig = {}, deps: Dependencies = []) {
+function ModuleDecorator(val: string | Dependencies | ModuleOptions = {}, deps: Dependencies = []) {
   return function(target: Function): void {
-    let config: BaseConfig;
+    let config: ModuleOptions;
 
     if (Array.isArray(val)) {
       config = { dependencies: val };
@@ -24,6 +27,10 @@ function NgModuleDecorator(val: string | Dependencies | BaseConfig = {}, deps: D
       config = val;
     }
 
-    createModule(target, config.dependencies, name(target, config));
+    let ngMod = createModule(target, config.dependencies, name(target, config));
+
+    // Register values and constants
+    angular.forEach(config.values, (val, key) => ngMod.value(key, val));
+    angular.forEach(config.constants, (val, key) => ngMod.constant(key, val));
   };
 }
