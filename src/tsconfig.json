@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
     "allowSyntheticDefaultImports": true,
     "outDir": "../dist",
     "sourceMap": true,
