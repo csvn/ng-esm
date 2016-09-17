@@ -1,7 +1,7 @@
 import './vendor';
 import './config';
 import 'angular';
-import { NgModule, getNgModule, getModuleIds } from 'ng-esm';
+import { NgModule, getModuleIds } from 'ng-esm';
 
 import components from './src/components';
 import config from './src/config';
@@ -11,11 +11,11 @@ import services from './src/services';
 import views from './src/views';
 
 
-@NgModule([components, config, directives, filters, services, views])
+@NgModule({
+  dependencies: [components, config, directives, filters, services, views],
+  values: { global: 'Hello world!' },
+  constants: { constant: 'Const val!' }
+})
 class App {}
-
-getNgModule(App)
-  .value('global', 'Hello world!')
-  .constant('constant', 'Const val!');
 
 console.info('Registered angular modules: ', getModuleIds());
