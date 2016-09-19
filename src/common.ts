@@ -3,7 +3,7 @@ export type Dependencies = (string | Function)[];
 
 export interface OnInit {
   /** This method will be executed after the class has been instantiated */
-  $onInit(): void;
+  $onInit?(): void;
 }
 
 /** Will be injected when instantiated */
