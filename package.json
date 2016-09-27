@@ -10,13 +10,18 @@
     "example"
   ],
   "scripts": {
-    "start": "npm-run-all build --parallel example:watch example:serve",
-    "example:watch": "tsc -w -p example",
-    "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
-    "build": "tsc -p src && tsc -d -p src -m es2015 --outDir dist/esm",
+    "start": "run-p watch:* serve",
+    "serve": "browser-sync start -s . -f node_modules/ng-esm/**/*.js example/**/*.js example/*.html --no-open",
+    "update": "copyfiles dist/**/* package.json node_modules/ng-esm",
+    "build": "run-p build:*",
+    "build:cjs": "tsc -p src",
+    "build:esm": "tsc -d -p src -m es2015 --outDir dist/esm",
+    "watch:cjs": "tsc -w -p src",
+    "watch:esm": "tsc -w -d -p src -m es2015 --outDir dist/esm",
+    "watch:example": "tsc -w -p example",
+    "watch:copy": "watch \"npm run update\" dist --wait=0.5",
     "prebuild": "rimraf dist",
-    "prepublish": "in-publish && npm run build || not-in-publish",
-    "postbuild": "copyfiles dist/**/* package.json node_modules/ng-esm"
+    "prepublish": "in-publish && npm run build || not-in-publish"
   },
   "keywords": [
     "angular",
@@ -53,6 +58,7 @@
     "rimraf": "^2.5.4",
     "systemjs": "^0.19.39",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.3",
+    "watch": "^0.19.2"
   }
 }
