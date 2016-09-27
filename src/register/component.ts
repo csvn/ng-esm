@@ -12,13 +12,15 @@ export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {}
 /** Decorate a class (controller) as an angular component */
 export function Component(options: ComponentOptions) {
   return function(target: Function): void {
+    const COMP_NAME = toCamel(name(target, options));
+
     options.controller = <any> target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
 
-    Reflect.defineProperty(target, NAME_SYMBOL, { value: options.name });
+    Reflect.defineProperty(target, NAME_SYMBOL, { value: COMP_NAME });
 
     createModule(target, options.dependencies)
-      .component(toCamel(name(target, options)), options);
+      .component(COMP_NAME, options);
   };
 }
 
