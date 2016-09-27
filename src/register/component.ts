@@ -11,7 +11,7 @@ export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {}
 
 /** Decorate a class (controller) as an angular component */
 export function Component(options: ComponentOptions) {
-  return function(target: Function): void {
+  return function(target: () => void): void {
     options.controller = target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
 
