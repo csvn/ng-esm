@@ -39,13 +39,20 @@ export function name(target: Function, { name = target.name }: BaseConfig) {
 export function createModule(
   target?: null | Function, deps: Dependencies = [], name: null | string = null
 ) {
+  // If target already has a ng.module, will allow new one with the previous as dependency
+  // (i.e. for registering @State and @Component together)
+  let prevNgId: string | undefined = target && (<any> target)[ID_SYMBOL];
+  if (prevNgId) {
+    deps.push(prevNgId);
+  }
+
   let ngId = name === null ? generateId() : name,
       ngDeps = parseDependencies(deps),
       ngModule = angular.module(ngId, ngDeps);
 
   registerModuleId(ngId);
   if (angular.isFunction(target)) {
-    Reflect.defineProperty(target, ID_SYMBOL, { value: ngId });
+    Reflect.defineProperty(target, ID_SYMBOL, { value: ngId, writable: true });
   }
 
   return ngModule;
