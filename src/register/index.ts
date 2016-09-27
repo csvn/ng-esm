@@ -1,4 +1,4 @@
-export * from './component';
+export { Component, ComponentOptions } from './component';
 export * from './config';
 export * from './directive';
 export * from './factory';
