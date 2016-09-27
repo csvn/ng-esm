@@ -4,7 +4,7 @@ import { Lorem, Reverse } from '../lib';
 
 
 const template = `
-  <h1>Filters demo</h1>
+  <h1>Filters</h1>
 
   <md-divider></md-divider>
 
@@ -25,7 +25,7 @@ const template = `
   dependencies: [uiRouter, Lorem, Reverse],
   template
 })
-export default class FiltersView {
+export default class ViewFilters {
   constructor(private reverseText: string) {}
 
   @resolve

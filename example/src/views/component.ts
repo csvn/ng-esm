@@ -4,7 +4,7 @@ import { Greeter, Ticker } from '../lib';
 
 
 const template = `
-  <h1>Components demo</h1>
+  <h1>Components</h1>
 
   <md-divider></md-divider>
 

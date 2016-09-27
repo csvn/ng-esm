@@ -3,7 +3,7 @@ import { ChangeCount } from '../lib';
 
 
 const template = `
-  <h1>Directives demo</h1>
+  <h1>Directives</h1>
 
   <md-divider></md-divider>
 
@@ -21,7 +21,7 @@ const template = `
   dependencies: [ChangeCount],
   template
 })
-export default class DirectiveView {
+export default class ViewDirectives {
   someInput: string;
   changeCount: number;
 }

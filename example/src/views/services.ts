@@ -4,7 +4,7 @@ import { Color, Null, NullFactory, Logger, LoggerProvider } from '../lib';
 
 
 const template = `
-  <h1>Services demo</h1>
+  <h1>Services</h1>
 
   <md-divider></md-divider>
 
@@ -36,7 +36,7 @@ const template = `
   dependencies: [uiRouter, Color, NullFactory, LoggerProvider],
   template
 })
-export default class ServicesView {
+export default class ViewServices {
   c: Color;
   hexModel = '#0077ff';
   rgbModel = 'rgb(255, 120, 0)';

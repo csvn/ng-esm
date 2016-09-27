@@ -1,10 +1,11 @@
 import { NgModule } from 'ng-esm';
 
-import homeView from './home';
-import componentView from  './component';
-import directivesView from  './directives';
-import filtersView from  './filters';
-import servicesView from  './services';
+import home from './home';
+import component from  './component';
+import directives from  './directives';
+import filters from  './filters';
+import services from  './services';
+import router from  './router';
 
-@NgModule([homeView, componentView, directivesView, filtersView, servicesView])
+@NgModule([home, component, directives, filters, services, router])
 export default class Views {}
