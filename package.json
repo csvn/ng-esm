@@ -1,6 +1,6 @@
 {
   "name": "ng-esm",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "ES2015 modules and decorators with Angular 1",
   "main": "dist/main.js",
   "jsnext:main": "dist/esm/main.js",
