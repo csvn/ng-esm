@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "run-p watch:* serve",
-    "serve": "browser-sync start -s . -f node_modules/ng-esm/**/*.js example/**/*.js example/*.html --no-open",
+    "serve": "browser-sync start -s . -f node_modules/ng-esm/**/*.js example/dist/*.js example/* --no-open",
     "update": "copyfiles dist/**/* package.json node_modules/ng-esm",
     "build": "run-p build:*",
     "build:cjs": "tsc -p src",

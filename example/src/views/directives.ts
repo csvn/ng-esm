@@ -1,28 +1,27 @@
-import ng from 'angular';
 import { State } from 'ng-esm';
+import { ChangeCount } from '../lib';
+
 
 const template = `
   <h1>Directives demo</h1>
 
   <md-divider></md-divider>
 
-  <div model ng-model="vm.test">
-    This is a &lt;div&gt; with "model" directive! ({{ vm.test }})
-  </div>
+  <md-input-container model ng-model="vm.test">
+    <label>Some input</label>
+    <input type="text" ng-model="vm.someInput" change-count="vm.changeCount" />
+  </md-input-container>
+  <pre style="margin-top: -18px;">Number of changes: {{ vm.changeCount }}</pre>
 `;
 
 
 @State({
   name: 'directives',
   url: '/directives',
+  dependencies: [ChangeCount],
   template
 })
 export default class DirectiveView {
-  test = 1;
-
-  constructor(private $interval: ng.IIntervalService) {}
-
-  $onInit() {
-    this.$interval(() => this.test++, 300);
-  }
+  someInput: string;
+  changeCount: number;
 }

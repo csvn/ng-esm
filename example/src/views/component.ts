@@ -1,27 +1,42 @@
 import uiRouter from 'angular-ui-router';
-import { State, Resolve } from 'ng-esm';
+import { State, Component, resolve } from 'ng-esm';
+import { Greeter, Ticker } from '../lib';
+
 
 const template = `
   <h1>Components demo</h1>
 
   <md-divider></md-divider>
 
-  "{{ vm.foo }}" and "{{ vm.bar }}"
+  <my-greeter name="John" greetings="vm.greetings"></my-greeter>
 
-  <ticker></ticker>
+  <my-ticker></my-ticker>
 `;
 
 
-@Resolve({
-  foo: () => 'fooo!',
-  bar: () => Promise.resolve('baaar!')
-})
 @State({
   name: 'components',
   url: '/components',
-  template,
-  dependencies: [uiRouter]
+  bindings: {},
+  dependencies: [uiRouter, Greeter, Ticker]
 })
-export default class ComponentView {
-  constructor(private foo: string, private bar: string) {}
+@Component({
+  bindings: {
+    greetings: '<'
+  },
+  template
+})
+export default class ViewComponent {
+  greetings: string;
+
+  @resolve
+  static greetings($log: ng.ILogService) {
+    return new Promise(resolve => {
+      let timestamp = Date.now();
+      setTimeout(() => {
+        $log.info(`Resolved greetings in ${Date.now() - timestamp}ms`);
+        resolve(['Yo', 'Sup', 'Hello', 'Greetings', 'Hejsan', 'Aloha']);
+      }, Math.floor(Math.random() * 400));
+    });
+  }
 }
