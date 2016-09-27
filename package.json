@@ -10,12 +10,13 @@
     "example"
   ],
   "scripts": {
-    "start": "run-p example:watch example:serve",
+    "start": "npm-run-all build --parallel example:watch example:serve",
     "example:watch": "tsc -w -p example",
     "example:serve": "browser-sync start -s . -f example/**/*.js example/*.html --no-open",
     "build": "tsc -p src && tsc -d -p src -m es2015 --outDir dist/esm",
     "prebuild": "rimraf dist",
-    "prepublish": "in-publish && npm run build || not-in-publish"
+    "prepublish": "in-publish && npm run build || not-in-publish",
+    "postbuild": "copyfiles dist/**/* package.json node_modules/ng-esm"
   },
   "keywords": [
     "angular",
@@ -45,6 +46,7 @@
     "angular-material": "^1.1.1",
     "angular-ui-router": "^1.0.0-beta.3",
     "browser-sync": "^2.16.0",
+    "copyfiles": "^1.0.0",
     "in-publish": "^2.0.0",
     "ng-esm": "1.2.0",
     "npm-run-all": "^3.1.0",
