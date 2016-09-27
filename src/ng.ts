@@ -74,5 +74,14 @@ function getModuleId({ [ID_SYMBOL]: moduleId }): string {
 }
 
 function parseDependencies(deps: Dependencies): string[] {
-  return deps.map(d => angular.isString(d) ? d : getModuleId(d));
+  return deps.map(d => {
+    if (angular.isString(d)) {
+      return d;
+    } else if (angular.isFunction(d)) {
+      return getModuleId(d);
+    }
+
+    throw new Error(`Only 'string' & 'Function' (decorated by 'ng-esm') are ` +
+      `supported as dependencies. Was '${typeof d}'.`);
+  });
 }
