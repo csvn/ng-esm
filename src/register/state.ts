@@ -53,8 +53,6 @@ export function State(options: StateOptions) {
     }
     stateRunner.$inject = ['$stateProvider'];
 
-    options.controller = target;
-    options.controllerAs = options.controllerAs || config.ctrlAs;
     options.dependencies = options.dependencies || [];
     if (options.dependencies.indexOf(UI_ROUTER) < 0) {
       options.dependencies.push(UI_ROUTER);
@@ -78,16 +76,21 @@ function decorateComponentOptions(options: StateOptions, target: Function) {
     options.views = {
       [viewName]: {
         bindings: options.bindings,
-        component: componentName(target),
-        resolveAs: options.resolveAs
+        component: componentName(target)
       }
     };
-  } else {
+    delete options.bindings;
+    delete options.component;
+  } else if (options.views) {
     // Transform `Function` to `string` for any @Component() in the views declaration
     let views = options.views || {};
     Object.keys(views).forEach(k => {
       let val = views[k];
       views[k] = typeof val === 'function' ? componentName(val) : val;
     });
+  } else {
+    // Set the class as a regular controller
+    options.controller = target;
+    options.controllerAs = options.controllerAs || config.ctrlAs;
   }
 }
