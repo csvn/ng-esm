@@ -13,8 +13,8 @@ export interface DirectiveOptions extends BaseConfig, ng.IDirective {}
  * it is better to just use the method `ngModule()` to create an angular module
  */
 export function Directive(options: DirectiveOptions) {
-  return function(target: () => void): void {
-    options.controller = target;
+  return function(target: Function): void {
+    options.controller = <any> target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
 
     createModule(target, options.dependencies)
