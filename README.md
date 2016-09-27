@@ -20,7 +20,6 @@
 * Currently beta-like state
 * Documentation is not great
 * Unit tests are not yet implemented (only example usage)
-* @State should also support component views
 
 ## Motivation
 
