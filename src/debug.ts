@@ -5,6 +5,7 @@ export function getModuleIds() {
   return REGISTERED_MODULES;
 }
 
+/** (internal) */
 export function registerModuleId(moduleId: string) {
   REGISTERED_MODULES.push(moduleId);
 }

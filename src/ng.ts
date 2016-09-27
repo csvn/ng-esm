@@ -17,6 +17,7 @@ export interface NgEsmConfig {
   ctrlAs: string | undefined;
 }
 
+/** (internal) */
 export const config: NgEsmConfig = {
   ctrlAs: '$ctrl'
 };
@@ -25,6 +26,7 @@ export const config: NgEsmConfig = {
 const ID_SYMBOL = Symbol('moduleId');
 let currentModuleIndex = 0;
 
+/** (internal) */
 export function name(target: Function, { name = target.name }: BaseConfig) {
   if (!name) {
     throw new Error(`Must provide named class, or 'name' property in config`);
@@ -33,6 +35,7 @@ export function name(target: Function, { name = target.name }: BaseConfig) {
   return name;
 }
 
+/** (internal) */
 export function createModule(
   target?: null | Function, deps: Dependencies = [], name: null | string = null
 ) {
