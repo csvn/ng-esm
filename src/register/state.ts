@@ -89,10 +89,10 @@ function decorateComponentOptions(options: StateOptions, target: Function) {
     views[k] = typeof val === 'function' ? componentName(val) : val;
   });
 
-  let viewOptions = {};
+  let viewOptions = null;
   // If the target is also a @Component(), set the component as a view
-  if (componentName(target)) {
-    options.component = componentName(target);
+  if (isComponent(target, options)) {
+    options.component = componentName(target) || options.component;
     viewOptions = spliceValues(options, ...COMPONENT_VIEW);
   } else if (hasTemplate(options)) {
     // Set the class as a regular controller
@@ -101,7 +101,10 @@ function decorateComponentOptions(options: StateOptions, target: Function) {
     viewOptions = spliceValues(options, ...NON_COMPONENT_VIEW);
   }
 
-  options.views[options.view || '$default'] = viewOptions;
+  let viewName = options.view || '$default';
+  if (viewOptions && !views[viewName]) {
+    views[viewName] = viewOptions;
+  }
 }
 
 function spliceValues(source: any, ...keys: string[]) {
@@ -113,6 +116,10 @@ function spliceValues(source: any, ...keys: string[]) {
   });
 
   return result;
+}
+
+function isComponent(target: Function, { component }: StateOptions) {
+  return !!componentName(target) || !!component;
 }
 
 function hasTemplate({ template, templateUrl, templateProvider }: StateOptions) {
