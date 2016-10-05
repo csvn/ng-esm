@@ -88,7 +88,7 @@ function decorateComponentOptions(options: StateOptions, target: Function) {
       let val = views[k];
       views[k] = typeof val === 'function' ? componentName(val) : val;
     });
-  } else {
+  } else if (options.template || options.templateUrl || options.templateProvider) {
     // Set the class as a regular controller
     options.controller = target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
