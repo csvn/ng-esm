@@ -6,6 +6,19 @@ import { RESOLVES_SYMBOL } from './resolve';
 
 
 const UI_ROUTER = 'ui.router';
+const COMPONENT_VIEW = Object.freeze([
+  'bindings',
+  'component'
+]);
+const NON_COMPONENT_VIEW = Object.freeze([
+  'controller',
+  'controllerAs',
+  'controllerProvider',
+  'resolveAs',
+  'template',
+  'templateProvider',
+  'templateUrl'
+]);
 
 /**
  * UI-router state declaration. Can be used with @Component() to use the new
@@ -69,28 +82,39 @@ export function State(options: StateOptions) {
  * this metadata to the options object (mutates the object).
  */
 function decorateComponentOptions(options: StateOptions, target: Function) {
+  let views = options.views = options.views || {};
+
+  Object.keys(views).forEach(k => {
+    let val = views[k];
+    views[k] = typeof val === 'function' ? componentName(val) : val;
+  });
+
+  let viewOptions = {};
   // If the target is also a @Component(), set the component as a view
   if (componentName(target)) {
-    let viewName = options.view || '$default';
-
-    options.views = {
-      [viewName]: {
-        bindings: options.bindings,
-        component: componentName(target)
-      }
-    };
-    delete options.bindings;
-    delete options.component;
-  } else if (options.views) {
-    // Transform `Function` to `string` for any @Component() in the views declaration
-    let views = options.views || {};
-    Object.keys(views).forEach(k => {
-      let val = views[k];
-      views[k] = typeof val === 'function' ? componentName(val) : val;
-    });
-  } else if (options.template || options.templateUrl || options.templateProvider) {
+    options.component = componentName(target);
+    viewOptions = spliceValues(options, ...COMPONENT_VIEW);
+  } else if (hasTemplate(options)) {
     // Set the class as a regular controller
     options.controller = target;
     options.controllerAs = options.controllerAs || config.ctrlAs;
+    viewOptions = spliceValues(options, ...NON_COMPONENT_VIEW);
   }
+
+  options.views[options.view || '$default'] = viewOptions;
+}
+
+function spliceValues(source: any, ...keys: string[]) {
+  let result: any = {};
+
+  keys.forEach(k => {
+    result[k] = source[k];
+    delete source[k];
+  });
+
+  return result;
+}
+
+function hasTemplate({ template, templateUrl, templateProvider }: StateOptions) {
+  return !!(template || templateUrl || templateProvider);
 }
