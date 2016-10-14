@@ -1,4 +1,6 @@
-import { StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration } from 'angular-ui-router';
+import {
+  StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration, HookResult
+} from 'angular-ui-router';
 import { config, createModule } from '../ng';
 import { BaseConfig } from '../common';
 import { componentName } from './component';
@@ -51,6 +53,13 @@ export interface StateOptions extends BaseConfig, Ng1StateDeclaration {
   views?: {
     [key: string]: string | Function | Ng1ViewDeclaration;
   };
+
+  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
+  onEnter(...injectables: any[]): HookResult;
+  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
+  onExit(...injectables: any[]): HookResult;
+  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
+  onRetain(...injectables: any[]): HookResult;
 }
 
 /** Decorate a class (controller) as a new state. TODO: support for simultaneous `@Component()` */
