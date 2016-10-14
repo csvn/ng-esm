@@ -55,11 +55,11 @@ export interface StateOptions extends BaseConfig, Ng1StateDeclaration {
   };
 
   /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onEnter(...injectables: any[]): HookResult;
+  onEnter?(...injectables: any[]): HookResult;
   /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onExit(...injectables: any[]): HookResult;
+  onExit?(...injectables: any[]): HookResult;
   /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onRetain(...injectables: any[]): HookResult;
+  onRetain?(...injectables: any[]): HookResult;
 }
 
 /** Decorate a class (controller) as a new state. TODO: support for simultaneous `@Component()` */
