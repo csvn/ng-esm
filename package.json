@@ -6,8 +6,7 @@
   "jsnext:main": "dist/esm/main.js",
   "typings": "dist/esm/main.d.ts",
   "files": [
-    "dist",
-    "example"
+    "dist"
   ],
   "scripts": {
     "start": "npm run link && run-p watch:* serve",
