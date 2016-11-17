@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { toCamel } from '../case';
 import { InjectConstructor, name, createModule } from '../ng';
 import { BaseConfig } from '../common';

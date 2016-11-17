@@ -7,10 +7,8 @@
       "dom",
       "es2015"
     ],
-    "allowSyntheticDefaultImports": true,
     "outDir": "../dist",
     "sourceMap": true,
-    "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,

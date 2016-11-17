@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { name, InjectConstructor, createModule } from '../ng';
 import { BaseConfig, FactoryCreator } from '../common';
 

@@ -1,9 +1,7 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { Dependencies, BaseConfig } from './common';
 import { registerModuleId } from './debug';
 
-
-declare let angular: ng.IAngularStatic;
 
 export interface InjectFn {
   (...injectables: any[]): void;
@@ -48,10 +46,10 @@ export function createModule(
 
   let ngId = name === null ? generateId() : name,
       ngDeps = parseDependencies(deps),
-      ngModule = angular.module(ngId, ngDeps);
+      ngModule = ng.module(ngId, ngDeps);
 
   registerModuleId(ngId);
-  if (angular.isFunction(target)) {
+  if (ng.isFunction(target)) {
     Reflect.defineProperty(target, ID_SYMBOL, { value: ngId, writable: true });
   }
 
@@ -65,7 +63,7 @@ export function ngModule(name?: string | null, deps?: Dependencies) {
 
 /** Retrieve a angular module from a string or decorated class/function */
 export function getNgModule(value: string | Function) {
-  return angular.module(getModuleId(value));
+  return ng.module(getModuleId(value));
 }
 
 
@@ -85,9 +83,9 @@ function getModuleId({ [ID_SYMBOL]: moduleId }): string {
 
 function parseDependencies(deps: Dependencies): string[] {
   return deps.map(d => {
-    if (angular.isString(d)) {
+    if (ng.isString(d)) {
       return d;
-    } else if (angular.isFunction(d)) {
+    } else if (ng.isFunction(d)) {
       return getModuleId(d);
     }
 

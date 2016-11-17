@@ -6,7 +6,6 @@
     "outFile": "dist/main.js",
     "sourceMap": true,
     "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
+    "experimentalDecorators": true
   }
 }
