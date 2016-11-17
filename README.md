@@ -22,7 +22,7 @@
 
 ## Motivation
 
-Angular is awesome. The module system in Angular 1 when using es2015 import/export statements is... not as awesome. It typically results in a lot of extra wiring code and boilerplate.
+Angular is awesome. The module system in Angular 1 when using es2015 import/export statements is... not as awesome. It typically results in a lot of extra wiring code and boilerplate which can be tricky to incorporate into a modern modular workflow.
 
 ```javascript
 //# some.component.js
@@ -60,13 +60,13 @@ It's possible to just create one angular module, and stick every directive, comp
 
 ## Goals
 
-* Conveniently decorate class as e.g. component/service, to reduce boilerplate
+* Conveniently decorate class as e.g. component/service for reduced boilerplate
 
-* Allow classes as dependencies to skip string module name exports
+* Allow classes as dependencies to skip exporting angular module strings
 
 * Provide excellent tooling support via Typescript
 
-* Match Angular2 syntax where it makes sense. Decorators already increase similarity to ng2
+* Match Angular2 syntax where it makes sense (decorators by themselves increase similarity to ng2)
 
 ## Usage
 
