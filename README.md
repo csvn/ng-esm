@@ -17,9 +17,8 @@
     * [miscellaneous stuff](#miscellaneous-stuff)
 
 ## Current progress
-* Currently beta-like state
-* Documentation is not great
-* Unit tests are not yet implemented (only example usage)
+* Documentation can still be improved a lot
+* Unit tests are not yet implemented (only example usage as of yet)
 
 ## Motivation
 
