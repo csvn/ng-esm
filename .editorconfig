@@ -13,3 +13,8 @@ trim_trailing_whitespace = true
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false
+
+
+# Ignore formatting for node_modules
+[node_modules/**]
+end_of_line = none
