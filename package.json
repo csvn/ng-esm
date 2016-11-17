@@ -12,6 +12,7 @@
   "scripts": {
     "start": "run-p watch:* serve",
     "serve": "browser-sync start -s . -f dist example --startPath /example",
+    "test": "echo \"No tests yet...\" && exit 0",
     "build": "run-p build:*",
     "build:cjs": "tsc -p src",
     "build:esm": "tsc -d -p src -m es2015 --outDir dist/esm",

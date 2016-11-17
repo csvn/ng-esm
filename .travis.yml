@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- '6'
+
+deploy:
+  provider: npm
+  email: csvn.dev@gmail.com
+  api_key:
+    secure: mqD1Sylg3dn7ZuHrPbPQL3leVkq5KAKAQblWABEULaypDSip4rJ9D3a6zRyHrvBkJ1gfR1Mc5MdUuIrCEfwqlyVTtrgpTpI0rhQQnijEqXIMrIq0FPg5ntcCtz3DJIm9oixdeOAeAzjT9/LzVuzHhXREVatN7CcdixIvUx6dTz0d3iiFYuuXzDNddGTRx35kMiVSUItBWSpjSOYvmcqBh/RXl9XEKsSjWSJpJX6n+1RkQJf/y+0vuncZgaDtZ6rXJns5GMGJHYxgsfQNF1BjiUl1wRna0NUsTACgLlmEwdxM2Oes2oE7k0MX4ev8OYHwGGKyW0bK3mUDOXDhkr5O86RX2ejioPnTTEXL0+TSvGoYZTdQ4k2sM+yWm3ZSpDCm9ARg9RbXLniIubndZEiflI6R1A1oMRn4AY5zDBJmuxDVLTW8flFdvAaHYFOFSEuqBFyXSdhFRTbnxPUJ1p9/daC3ESNFqrLJmFi21o6q6E5tkFHYCpR6fPZ/20H6MDowbaEcPA2CkTWPrThkWiZZ8pgxfpgpTG5G1SS5Pj18yYdUHBRoB/NK2/1k8921s9fIJFxNM06XFueNpoOidICSKRNCsynTnyr6Ec/aIOujq/b9+VggW109j4dVFc+aUQtzjoUCW0+jzOOadzGxTGrkUXSw5MSzMPRb1X2Az6WcrSw=
+  on:
+    tags: true
+    repo: csvn/ng-esm
