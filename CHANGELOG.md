@@ -1,9 +1,11 @@
-# v1.3.9 (2016-xx-xx)
+# Changelog
+
+## v1.3.9 (2016-xx-xx)
 
 ### Features
 
-* **feature**: some feature ([hash](link))
+* some feature ([hash](link))
 
 ### Bug fixes
 
-* **fix**: some fix ([hash](link))
+* some fix ([hash](link))
