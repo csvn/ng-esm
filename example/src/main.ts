@@ -1,6 +1,4 @@
-import './vendor';
 import './config';
-import 'angular';
 import { NgModule, getModuleIds } from 'ng-esm';
 
 import common from './common';
