@@ -9,17 +9,17 @@
     "dist"
   ],
   "scripts": {
-    "start": "npm run link && run-p watch:* serve",
+    "prestart": "node scripts/symlink.js",
+    "start": "run-p watch:* serve",
     "serve": "browser-sync start -s . -f dist example --startPath /example",
-    "link": "node scripts/symlink.js",
     "test": "echo \"No tests yet...\" && exit 0",
+    "prebuild": "rimraf dist",
     "build": "run-p build:*",
     "build:cjs": "tsc -p src -m commonjs --outDir dist",
     "build:esm": "tsc -d -p src",
     "watch:cjs": "tsc -w -p src -m commonjs --outDir dist",
     "watch:esm": "tsc -w -d -p src",
     "watch:example": "tsc -w -p example",
-    "prebuild": "rimraf dist",
     "prepublish": "in-publish && npm run build || not-in-publish"
   },
   "keywords": [
