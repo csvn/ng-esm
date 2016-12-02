@@ -8,8 +8,8 @@ const link = './node_modules/ng-esm';
 
 fs.lstat(link, (err, stats) => {
   if (!err && stats.isSymbolicLink()) {
-    console.log(`Already linked: "${link}" => "${target}"`);
-    return;
+    fs.unlinkSync(link);
+    console.log(`Removed previous link at "${link}"`);
   } else if (!err && stats.isDirectory()) {
     fs.rmdirSync(link);
     console.log(`Removed installed copy at "${link}"`);
