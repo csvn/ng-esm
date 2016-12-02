@@ -6,7 +6,8 @@
   "jsnext:main": "dist/esm/main.js",
   "typings": "dist/esm/main.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "engines": {
     "node": "^6.9.0",
