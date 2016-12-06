@@ -11,7 +11,7 @@ export interface RootScope extends ng.IRootScopeService {
 export class CommonRun {
   constructor($rootScope: RootScope, $transitions: TransitionService) {
     $transitions.onSuccess({}, t => {
-      $rootScope.currentState = t.to().name;
+      $rootScope.currentState = t.to().name as string;
     });
   }
 }

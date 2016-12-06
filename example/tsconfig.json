@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "outFile": "dist/main.js",
     "sourceMap": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strictNullChecks": true
   }
 }
