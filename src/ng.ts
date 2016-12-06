@@ -44,9 +44,13 @@ export function createModule(
     deps.push(prevNgId);
   }
 
-  let ngId = name === null ? generateId() : name,
-      ngDeps = parseDependencies(deps),
-      ngModule = ng.module(ngId, ngDeps);
+  const parsedDeps = deps.map(d => ng.isString(d) ? d : getModuleId(d));
+  const ngId = name === null ? generateId() : name;
+  const ngDeps = parsedDeps.filter(d => ng.isString(d)) as string[];
+
+  validateDependencies(target, parsedDeps, ngDeps);
+
+  const ngModule = ng.module(ngId, ngDeps);
 
   registerModuleId(ngId);
   if (ng.isFunction(target)) {
@@ -63,7 +67,14 @@ export function ngModule(name?: string | null, deps?: Dependencies) {
 
 /** Retrieve a angular module from a string or decorated class/function */
 export function getNgModule(value: string | Function) {
-  return ng.module(getModuleId(value));
+  const id = getModuleId(value);
+
+  if (ng.isFunction(id)) {
+    const msg = `Missing ngModule id, as function "${id.name}" is not decorated by 'ng-esm'.`;
+    console.error(msg);
+  }
+
+  return ng.module(id as string);
 }
 
 
@@ -72,24 +83,33 @@ function generateId() {
   return `ng-esm:${currentModuleIndex}`;
 }
 
-function getModuleId({ [ID_SYMBOL]: moduleId }): string {
-  if (!moduleId) {
-    throw new Error(`Function missing property Symbol('moduleId'). ` +
-      `Make sure all function dependencies are decorated by ng-esm`);
+function getModuleId(value: string | Function): string | Function {
+  if (ng.isString(value) || !value) {
+    return value;
   }
 
-  return moduleId;
+  const { [ID_SYMBOL]: moduleId } = value;
+
+  return moduleId ? moduleId : value;
 }
 
-function parseDependencies(deps: Dependencies): string[] {
-  return deps.map(d => {
-    if (ng.isString(d)) {
-      return d;
-    } else if (ng.isFunction(d)) {
-      return getModuleId(d);
-    }
+function validateDependencies(
+  target: null | undefined | Function, parsedDeps: Dependencies, ngDeps: string[]
+) {
+  if (ngDeps.length === parsedDeps.length) return;
 
-    throw new Error(`Only 'string' & 'Function' (decorated by 'ng-esm') are ` +
-      `supported as dependencies. Was '${typeof d}'.`);
-  });
+  const errors: string[] = parsedDeps
+    .filter(d => !ng.isString(d))
+    .map(d => ng.isFunction(d) ?
+      `\n  - '${d.name}' function (not decorated by 'ng-esm').` :
+      `\n  - ${d} (with type '${typeof d}').`
+    );
+  const errorsMsg = `List of invalid dependency values:${errors.join('')}`;
+
+  if (target) {
+    const msg = `[ng-esm]: Invalid angular dependencies in decorated class "${target.name}":`;
+    console.error(msg, target, '\n\n', errorsMsg, '\n\nDependencies:', parsedDeps);
+  } else {
+    console.error(errorsMsg, '\n\nDependencies:', parsedDeps);
+  }
 }
