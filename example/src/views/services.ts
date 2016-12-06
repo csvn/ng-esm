@@ -1,6 +1,6 @@
 import uiRouter from 'angular-ui-router';
 import { State } from 'ng-esm';
-import { Color, Null, NullFactory, Logger, LoggerProvider } from '../lib';
+import { Null, NullFactory, Logger, LoggerProvider, SuperColor } from '../lib';
 
 
 const template = `
@@ -33,19 +33,20 @@ const template = `
 @State({
   name: 'services',
   url: '/services',
-  dependencies: [uiRouter, Color, NullFactory, LoggerProvider],
+  dependencies: [uiRouter, NullFactory, LoggerProvider, SuperColor],
   template
 })
 export default class ViewServices {
-  c: Color;
+  c: SuperColor;
   hexModel = '#0077ff';
   rgbModel = 'rgb(255, 120, 0)';
 
-  constructor(Color: Color, private Null: Null, private Logger: Logger) {
+  constructor(Color: SuperColor, private Null: Null, private Logger: Logger) {
     this.c = Color;
   }
 
   $onInit() {
+    console.log(this.c, this.c.superColor());
     this.Logger('Null service:', this.Null);
     this.Logger('Color service:', this.c);
   }

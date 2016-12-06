@@ -1,5 +1,6 @@
 export * from './component';
 export * from './config';
+export * from './decorate';
 export * from './directive';
 export * from './factory';
 export * from './filter';
