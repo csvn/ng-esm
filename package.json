@@ -16,7 +16,7 @@
   "scripts": {
     "prestart": "node scripts/symlink.js",
     "start": "run-p watch:* serve",
-    "serve": "browser-sync start -s . -f dist example --startPath /example",
+    "serve": "browser-sync start -s . -f dist example/dist example/**/*.html example/**/*.css --startPath /example",
     "test": "echo \"No tests yet...\" && exit 0",
     "prebuild": "rimraf dist",
     "build": "run-p build:*",
