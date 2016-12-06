@@ -1,3 +1,4 @@
+import * as ng from 'angular';
 import {
   StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration, HookResult
 } from 'angular-ui-router';
@@ -94,8 +95,11 @@ function decorateComponentOptions(options: StateOptions, target: Function) {
   let views = options.views = options.views || {};
 
   Object.keys(views).forEach(k => {
-    let val = views[k];
-    views[k] = typeof val === 'function' ? componentName(val) : val;
+    const val = views[k];
+
+    if (ng.isFunction(val)) {
+      views[k] = componentName(val) || val;
+    }
   });
 
   let viewOptions = null;
