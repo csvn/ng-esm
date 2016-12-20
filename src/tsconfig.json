@@ -10,6 +10,7 @@
     "newLine": "LF",
     "outDir": "../dist/esm",
     "sourceMap": true,
+    "importHelpers": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
