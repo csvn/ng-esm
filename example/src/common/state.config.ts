@@ -1,10 +1,10 @@
 import { Config } from 'ng-esm';
-import { UrlRouterProvider } from 'angular-ui-router';
+import { UrlService } from 'angular-ui-router';
 
 
 @Config()
 export class StateConfig {
-  constructor($urlRouterProvider: UrlRouterProvider) {
-    $urlRouterProvider.when('', '/');
+  constructor($urlServiceProvider: UrlService) {
+    $urlServiceProvider.rules.when('', '/');
   }
 }

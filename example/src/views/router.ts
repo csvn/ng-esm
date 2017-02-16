@@ -1,26 +1,36 @@
-import uiRouter from 'angular-ui-router';
-import { Component, State } from 'ng-esm';
+import { Component, State, Resolve } from 'ng-esm';
 
+const template = createTemplate();
 
 // Combined @State/@Component class
+@Resolve({
+  color: () => 'steelblue'
+})
 @State({
   name: 'router.row.foo',
+  url: '/foo',
   view: 'main@router'
 })
-@Component({
-  template: '<h2 style="color: steelblue;">FOO &ndash; MAIN</h2>'
-})
-class ViewRouterRowFoo {}
+@Component({ bindings: { color: '<' }, template })
+class ViewRouterRowFoo {
+  name = 'FOO';
+  view = 'MAIN';
+}
 
 
 // @State with separate @Component
-@Component({
-  template: '<h2 style="color: firebrick;">BAR &ndash; MAIN</h2>'
-})
-class Bar {}
+@Component({ bindings: { color: '<' }, template })
+class Bar {
+  name = 'BAR';
+  view = 'MAIN';
+}
 
+@Resolve({
+  color: () => 'firebrick'
+})
 @State({
   name: 'router.row.bar',
+  url: '/bar',
   dependencies: [Bar],
   views: {
     'main@router': Bar
@@ -28,21 +38,49 @@ class Bar {}
 })
 class ViewRouterRowBar {}
 
+// @State with separate controller/template
+@Resolve({
+  color: () => 'goldenrod'
+})
+@State({
+  name: 'router.row.baz',
+  url: '/baz',
+  view: 'main@router',
+  controllerAs: 'foo',
+  resolveAs: '$rao',
+  template: createTemplate('foo')
+})
+class ViewRouterRowBaz {
+  $rao: { color: string };
+  color: string;
+  name = 'BAZ';
+  view = 'MAIN';
+
+  $onInit() {
+    this.color = this.$rao.color;
+  }
+}
+
 
 // Multiple views has to have its own @State decorator
-@Component({
-  template: '<h2>ROW &ndash; LEFT</h2>'
-})
-class Left {}
+@Component({ template })
+class Left {
+  color = 'black';
+  name = 'ROW';
+  view = 'RIGHT';
+}
 
-@Component({
-  template: '<h2>ROW &ndash; RIGHT</h2>'
-})
-class Right {}
+@Component({ template })
+class Right {
+  color = 'black';
+  name = 'ROW';
+  view = 'RIGHT';
+}
 
 @State({
   name: 'router.row',
-  dependencies: [Left, Right, ViewRouterRowFoo, ViewRouterRowBar],
+  url: '/row',
+  dependencies: [Left, Right],
   views: {
     left: Left,
     right: Right
@@ -54,7 +92,7 @@ class ViewRouterRow {}
 @State({
   name: 'router',
   url: '/router',
-  dependencies: [uiRouter, ViewRouterRow],
+  dependencies: [ViewRouterRow, ViewRouterRowFoo, ViewRouterRowBar, ViewRouterRowBaz],
   template: `
     <h1>Router</h1>
 
@@ -66,6 +104,7 @@ class ViewRouterRow {}
     <a ui-sref="router.row">router.row</a>
     <a ui-sref="router.row.foo">router.row.foo</a>
     <a ui-sref="router.row.bar">router.row.bar</a>
+    <a ui-sref="router.row.baz">router.row.baz</a>
 
     <p>Try out the links above to open components in different <code>ui-views</code></p>
 
@@ -79,4 +118,15 @@ class ViewRouterRow {}
       <ui-view name="right" flex>Empty</ui-view>
     </section>`
 })
-export default class ViewRouter {}
+export default class ViewRouter {
+  constructor($stateRegistry) {
+    console.log($stateRegistry);
+  }
+}
+
+
+function createTemplate(ctrl = 'vm') {
+  return `<h2 ng-style="{ color: ${ctrl}.color }">
+    {{ ${ctrl}.name }} &ndash; {{ ${ctrl}.view }}
+  </h2>`;
+}

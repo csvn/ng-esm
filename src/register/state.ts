@@ -1,7 +1,5 @@
 import * as ng from 'angular';
-import {
-  StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration, HookResult
-} from 'angular-ui-router';
+import { StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration } from 'angular-ui-router';
 import { config, createModule } from '../ng';
 import { BaseConfig } from '../common';
 import { componentName } from './component';
@@ -9,11 +7,10 @@ import { RESOLVES_SYMBOL } from './resolve';
 
 
 const UI_ROUTER = 'ui.router';
-const COMPONENT_VIEW = Object.freeze([
+const VIEW_PROPERTIES = Object.freeze([
   'bindings',
-  'component'
-]);
-const NON_COMPONENT_VIEW = Object.freeze([
+  'component',
+  'componentProvider',
   'controller',
   'controllerAs',
   'controllerProvider',
@@ -54,13 +51,6 @@ export interface StateOptions extends BaseConfig, Ng1StateDeclaration {
   views?: {
     [key: string]: string | Function | Ng1ViewDeclaration;
   };
-
-  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onEnter?(...injectables: any[]): HookResult;
-  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onExit?(...injectables: any[]): HookResult;
-  /** Ng1StateDeclaration for ui-router is bugged. Hook is injected as before v1.0.0 */
-  onRetain?(...injectables: any[]): HookResult;
 }
 
 /** Decorate a class (controller) as a new state. TODO: support for simultaneous `@Component()` */
@@ -71,8 +61,17 @@ export function State(options: StateOptions) {
         options.resolve = target[RESOLVES_SYMBOL];
       }
 
-      decorateComponentOptions(options, target);
-      $stateProvider.state(options.name, options);
+      const isComponent = !!componentName(target);
+      if (isComponent) {
+        options.component = componentName(target);
+      } else if (hasTemplate(options)) {
+        options.controller = target;
+        options.controllerAs = options.controllerAs || config.ctrlAs;
+      }
+
+      migrateViewProperties(options);
+
+      $stateProvider.state(options);
     }
     stateRunner.$inject = ['$stateProvider'];
 
@@ -87,52 +86,38 @@ export function State(options: StateOptions) {
 }
 
 
-/**
- * If the @State() class also has @Component() decorator, add
- * this metadata to the options object (mutates the object).
- */
-function decorateComponentOptions(options: StateOptions, target: Function) {
-  let views = options.views = options.views || {};
+function migrateViewProperties(options: StateOptions) {
+  const views = options.views = options.views || {};
+  const viewName = options.view || '$default';
+  const viewProperties = spliceValues(options, ...VIEW_PROPERTIES);
 
-  Object.keys(views).forEach(k => {
-    const val = views[k];
+  if (Object.keys(viewProperties).length) {
+    views[viewName] = viewProperties;
+  }
 
-    if (ng.isFunction(val)) {
-      views[k] = componentName(val) || val;
+  const list = Object.keys(views)
+    .map(key => ({ key, val: views[key] }))
+    .filter(({ val }) => ng.isFunction(val)) as { key: string, val: Function }[];
+
+  list.forEach(({ key, val }) => {
+    const name = componentName(val);
+    if (!name) {
+      throw new Error(`Function at \`views.${key}\` must be decorated by @Component()`);
+    } else {
+      views[key] = name;
     }
   });
-
-  let viewOptions = null;
-  // If the target is also a @Component(), set the component as a view
-  if (isComponent(target, options)) {
-    options.component = componentName(target) || options.component;
-    viewOptions = spliceValues(options, ...COMPONENT_VIEW);
-  } else if (hasTemplate(options)) {
-    // Set the class as a regular controller
-    options.controller = target;
-    options.controllerAs = options.controllerAs || config.ctrlAs;
-    viewOptions = spliceValues(options, ...NON_COMPONENT_VIEW);
-  }
-
-  let viewName = options.view || '$default';
-  if (viewOptions && !views[viewName]) {
-    views[viewName] = viewOptions;
-  }
 }
 
 function spliceValues(source: any, ...keys: string[]) {
   let result: any = {};
 
   keys.forEach(k => {
-    result[k] = source[k];
+    if (source[k]) result[k] = source[k];
     delete source[k];
   });
 
   return result;
-}
-
-function isComponent(target: Function, { component }: StateOptions) {
-  return !!componentName(target) || !!component;
 }
 
 function hasTemplate({ template, templateUrl, templateProvider }: StateOptions) {

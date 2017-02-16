@@ -10,6 +10,7 @@
     "newLine": "LF",
     "outDir": "../dist/esm",
     "sourceMap": true,
+    "skipLibCheck": true,
     "importHelpers": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,

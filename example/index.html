@@ -30,17 +30,20 @@
   <script>
     System.config({
       baseURL: '/example',
+      meta: {
+        'ng-esm': { esModule: true }
+      },
       paths: {
-        'npm:*': '../node_modules/*',
-        'ng:*': '../node_modules/angular-*'
+        'npm/': '../node_modules/',
+        'ng/': '../node_modules/angular-'
       },
       map: {
-        'angular': 'npm:angular/index.js',
-        'angular-aria': 'ng:aria/index.js',
-        'angular-animate': 'ng:animate/index.js',
-        'angular-material': 'ng:material/index.js',
-        'angular-ui-router': 'ng:ui-router/release/angular-ui-router.js',
-        'ng-esm': 'npm:ng-esm/dist/main.js'
+        'angular': 'npm/angular/index.js',
+        'angular-aria': 'ng/aria/index.js',
+        'angular-animate': 'ng/animate/index.js',
+        'angular-material': 'ng/material/index.js',
+        'angular-ui-router': 'ng/ui-router/release/angular-ui-router.js',
+        'ng-esm': 'npm/ng-esm/dist/main.js'
       },
       packages: {
         '../node_modules': {
