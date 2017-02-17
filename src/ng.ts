@@ -44,6 +44,8 @@ export function createModule(target: Function, deps: Dependencies = [], name: st
   const parsedDeps = deps.map(d => getModuleId(d));
   const ngId = !name ? generateId() : name;
   const ngDeps = parsedDeps.filter(d => ng.isString(d)) as string[];
+
+  validateUniqueNgModule(ngId);
   const ngModule = ng.module(ngId, ngDeps);
 
   registerModuleId(ngId);
@@ -83,6 +85,15 @@ function getModuleId<T>(value: T): T | string {
   }
 
   return value;
+}
+
+function validateUniqueNgModule(name: string): void {
+  try {
+    ng.module(name);
+  } catch (err) {
+    return;
+  }
+  throw new Error(`Can't create ng module: "${name}" already exists!`);
 }
 
 /** Log errors if any dependencies in `parsedDeps` are invalid */
