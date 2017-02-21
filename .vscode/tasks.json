@@ -19,6 +19,10 @@
     {
       "taskName": "install",
       "args": ["install"]
+    },
+    {
+      "taskName": "watch",
+      "args": ["run", "watch"]
     }
   ]
 }

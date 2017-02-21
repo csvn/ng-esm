@@ -4,7 +4,8 @@
     "target": "es2015",
     "outDir": "example/dist",
     "paths": {
-      "ng-esm": ["src/index.ts"]
+      "ng-esm": ["./dist/index"],
+      "ng-esm/dist/upgrade": ["./dist/upgrade"]
     }
   },
   "include": [
