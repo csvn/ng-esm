@@ -9,7 +9,7 @@ const NAME_SYMBOL = Symbol('componentName');
 /** Used for `@Component()` decorator. Extended version of settings for `ng.module().component()` */
 export interface ComponentOptions extends BaseConfig, ng.IComponentOptions {}
 
-/** Decorate a class (controller) as an angular component */
+/** Decorate a class (controller) as an AngularJS component */
 export function Component(options: ComponentOptions) {
   return function(target: Function): void {
     const componentName = toCamel(name(target, options));

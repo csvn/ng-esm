@@ -10,7 +10,10 @@ export interface FilterTransform {
   transform(value: any, ...args: any[]): any;
 }
 
-/** Mark a class as a angular filter. Make sure the class implements `FilterTransform` interface */
+/**
+ * Mark a class as a AngularJS filter.
+ * Make sure the class implements `FilterTransform` interface
+ */
 export function Filter(config: BaseConfig = {}) {
   return function(target: InjectConstructor<FilterTransform>): void {
     function filterRunner($injector: ng.auto.IInjectorService): Function {

@@ -4,12 +4,12 @@
 
 ### Breaking changes
 
-* Attempting to create an Angular module that already exists will now throw an error ([834ab7c](https://github.com/csvn/ng-esm/commit/834ab7cf0e66f0b3fab2b43a737e25b93550e3eb))
+* Attempting to create an AngularJS module that already exists will now throw an error ([834ab7c](https://github.com/csvn/ng-esm/commit/834ab7cf0e66f0b3fab2b43a737e25b93550e3eb))
 
 Before this change a module would be silently replaced when a module name already exists.
 This is almost always an error, as such this will now throw an error instead.
 
-If this is absolutely needed, just use angular regurlarly to accomplish this.
+If this is absolutely needed, just use AngularJS regurlarly to accomplish this.
 
 Before:
 ```javascript

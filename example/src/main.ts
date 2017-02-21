@@ -12,4 +12,4 @@ import views from './views';
 })
 class App {}
 
-console.info('Registered angular modules: ', getModuleIds());
+console.info('Registered AngularJS modules: ', getModuleIds());

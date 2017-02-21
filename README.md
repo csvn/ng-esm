@@ -1,6 +1,6 @@
 # ng-esm
 
-> ES2015 modules and decorators with Angular 1, complete with Typescript definition files
+> ES2015 modules and decorators with AngularJS, complete with Typescript definition files
 
 1. [Current progress](#current-progress)
 2. [Motivation](#motivation)
@@ -22,7 +22,7 @@
 
 ## Motivation
 
-Angular is awesome. The module system in Angular 1 when using es2015 import/export statements is... not as awesome. It typically results in a lot of extra wiring code and boilerplate which can be tricky to incorporate into a modern modular workflow.
+AngularJS is awesome. The module system in AngularJS when using es2015 import/export statements is... not as awesome. It typically results in a lot of extra wiring code and boilerplate which can be tricky to incorporate into a modern modular workflow.
 
 ```javascript
 //# some.component.js
@@ -46,7 +46,7 @@ It's not uncommon for developers to want to avoid using globals. This results in
 import ng from 'angular';
 ```
 
-It's also not uncommon to want to avoid duplicating magical angular module strings everywhere, which means we want to export the module name to avoid referring to it directly.
+It's also not uncommon to want to avoid duplicating magical AngularJS module strings everywhere, which means we want to export the module name to avoid referring to it directly.
 
 ```javascript
 export default angular
@@ -55,18 +55,18 @@ export default angular
   .name;
 ```
 
-It's possible to just create one angular module, and stick every directive, component, service and whatnot on that module. One drawback to this can be when a piece of code need to be tested in isolation (e.g. a config function unaffected by other config functions).
+It's possible to just create one AngularJS module, and stick every directive, component, service and whatnot on that module. One drawback to this can be when a piece of code need to be tested in isolation (e.g. a config function unaffected by other config functions).
 
 
 ## Goals
 
 * Conveniently decorate class as e.g. component/service for reduced boilerplate
 
-* Allow classes as dependencies to skip exporting angular module strings
+* Allow classes as dependencies to skip exporting AngularJS module strings
 
 * Provide excellent tooling support via Typescript
 
-* Match Angular2 syntax where it makes sense (decorators by themselves increase similarity to ng2)
+* Match Angular syntax where it makes sense (decorators by themselves increase similarity to ng2)
 
 ## Usage
 
@@ -132,7 +132,7 @@ import { MyGreeter } from './greeter.component';
 class Greeter {}
 ```
 
-If we would add `greeter` as a dependency to an angular module, we could then use `<my-greeter greeting="Hello"></my-greeter>` to create a component, and the `GreeterService.sayHello('Gabe')` to make all greeter components say hello.
+If we would add `greeter` as a dependency to an AngularJS module, we could then use `<my-greeter greeting="Hello"></my-greeter>` to create a component, and the `GreeterService.sayHello('Gabe')` to make all greeter components say hello.
 
 
 ### NgModule
@@ -164,7 +164,7 @@ class Sauce {}
 
 
 // useful for seldom used api's, e.g. animation, decorator
-// create a new angular module with generated name
+// create a new AngularJS module with generated name
 ngModule();
 // specify name
 ngModule('myModule');
@@ -346,11 +346,11 @@ import { controllerAs, getNgModule, getModuleIds } from 'ng-esm';
 // Set the default "controllerAs" name for component/directive/state
 controllerAs('vm');
 
-// Fetch an angular module for string or decorated class
+// Fetch an AngularJS module for string or decorated class
 getNgModule('app.contacts');
 
-// Returns an array of strings with all registered angular modules ids
+// Returns an array of strings with all registered AngularJS modules ids
 getModuleIds();
 ```
 
-> **Note**: controllerAs() should be set before any controllers are registered. Also don't forget to load this option for unit tests. Set this option in a module loaded right after angular for both tests and app code.
+> **Note**: controllerAs() should be set before any controllers are registered. Also don't forget to load this option for unit tests. Set this option in a module loaded right after AngularJS for both tests and app code.

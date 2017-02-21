@@ -4,7 +4,7 @@ import { InjectConstructor, name, createModule } from '../common/ng';
 
 const SERVICE_NAME = Symbol('serviceName');
 
-/** Register the decorated class as an angular service */
+/** Register the decorated class as an AngularJS service */
 export function Service(config: BaseConfig = {}) {
   return function(target: InjectConstructor<any>): void {
     const diName = name(target, config);

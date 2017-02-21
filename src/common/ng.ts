@@ -55,12 +55,12 @@ export function createModule(target: Function, deps: Dependencies = [], name: st
   return ngModule;
 }
 
-/** Create a new angular module, where name will be automatically generated if not provided */
+/** Create a new AngularJS module, where name will be automatically generated if not provided */
 export function ngModule(name?: string, deps?: Dependencies) {
   return createModule(() => {}, deps, name);
 }
 
-/** Retrieve a angular module from a string or decorated class/function */
+/** Retrieve a AngularJS module from a string or decorated class/function */
 export function getNgModule(value: string | Function) {
   const id = getModuleId(value);
 
@@ -69,7 +69,7 @@ export function getNgModule(value: string | Function) {
     console.error(msg);
   }
 
-  // Let angular handle invalid values
+  // Let AngularJS handle invalid values
   return ng.module(id as string);
 }
 
@@ -111,7 +111,7 @@ function validateDependencies(
   const errorsMsg = `List of invalid dependency values:${errors.join('')}`;
 
   if (target) {
-    const msg = `[ng-esm]: Invalid angular dependencies in decorated class "${target.name}":`;
+    const msg = `[ng-esm]: Invalid AngularJS dependencies in decorated class "${target.name}":`;
     console.error(msg, target, '\n\n', errorsMsg, '\n\nDependencies:', parsedDeps);
   } else {
     console.error(errorsMsg, '\n\nDependencies:', parsedDeps);
