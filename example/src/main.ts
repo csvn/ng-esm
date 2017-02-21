@@ -10,6 +10,6 @@ import views from './views';
   values: { appName: 'ng-esm' },
   constants: { constant: 'Const val!' }
 })
-class App {}
+export class App {}
 
 console.info('Registered AngularJS modules: ', getModuleIds());

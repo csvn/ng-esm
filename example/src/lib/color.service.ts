@@ -10,13 +10,13 @@ export class Color {
     let matches = HEX_REGEX.exec(hex),
         digits = matches ? matches[1] : null,
         size = (digits || []).length === 3 ? 1 : 2,
-        c = d => parseInt(d.length === 2 ? d : d + d, 16);
+        c = (d: string) => parseInt(d.length === 2 ? d : d + d, 16);
 
     if (!digits) {
       return null;
     }
 
-    const get = i => (digits as string).slice(i * size, (i + 1) * size);
+    const get = (i: number) => (digits as string).slice(i * size, (i + 1) * size);
 
     return `rgb(${c(get(0))}, ${c(get(1))}, ${c(get(2))})`;
   }
@@ -29,7 +29,7 @@ export class Color {
       return null;
     }
 
-    const h = i => `0${(digits as number[])[i].toString(16)}`.slice(-2);
+    const h = (i: number) => `0${(digits as number[])[i].toString(16)}`.slice(-2);
 
     return `#${h(0)}${h(1)}${h(2)}`;
   }

@@ -26,7 +26,7 @@ AngularJS is awesome. The module system in AngularJS when using es2015 import/ex
 
 ```javascript
 //# some.component.js
-import angular from 'angular'; // avoiding globals
+import * as angular from 'angular'; // avoiding globals
 
 export default angular
   .module('is-this-really-needed?', [])
@@ -34,7 +34,7 @@ export default angular
   .name;
 
 //# some.module.js
-import angular from 'angular';
+import * as angular from 'angular';
 import someComponent from './some.component';
 
 angular.module('might-be-needed', [someComponent]);
@@ -43,7 +43,7 @@ angular.module('might-be-needed', [someComponent]);
 It's not uncommon for developers to want to avoid using globals. This results in importing "angular" in every file that want to register a component or service.
 
 ```javascript
-import ng from 'angular';
+import * as ng from 'angular';
 ```
 
 It's also not uncommon to want to avoid duplicating magical AngularJS module strings everywhere, which means we want to export the module name to avoid referring to it directly.

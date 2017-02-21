@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="main.css" />
   <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" />
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,400italic' rel='stylesheet' type='text/css' />
+  <script src="dist/vendor.js"></script>
+  <script src="dist/app.js"></script>
 </head>
 <body ng-cloak ng-app="App" layout="column">
   <md-toolbar>
@@ -24,37 +26,5 @@
   </md-nav-bar>
 
   <md-content layout-padding flex ui-view></md-content>
-
-  <script src="../node_modules/systemjs/dist/system.js"></script>
-  <script src="dist/main.js"></script>
-  <script>
-    System.config({
-      baseURL: '/example',
-      meta: {
-        'ng-esm': { esModule: true }
-      },
-      paths: {
-        'npm/': '../node_modules/',
-        'ng/': '../node_modules/angular-'
-      },
-      map: {
-        'angular': 'npm/angular/index.js',
-        'angular-aria': 'ng/aria/index.js',
-        'angular-animate': 'ng/animate/index.js',
-        'angular-material': 'ng/material/index.js',
-        'angular-ui-router': 'ng/ui-router/release/angular-ui-router.js',
-        'ng-esm': 'npm/ng-esm/index.js'
-      },
-      packages: {
-        '../node_modules': {
-          main: 'index.js',
-          format: 'cjs',
-          defaultExtension: 'js'
-        }
-      }
-    });
-
-    System.import('main');
-  </script>
 </body>
 </html>

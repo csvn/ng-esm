@@ -3,35 +3,25 @@
   "version": "2.0.0",
   "description": "ES2015 modules and decorators with AngularJS",
   "main": "dist/index.js",
-  "module": "index.js",
-  "typings": "index.d.ts",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src",
-    "index.js",
-    "index.js.map",
-    "index.d.ts",
-    "upgrade.js",
-    "upgrade.js.map",
-    "upgrade.d.ts"
+    "src"
   ],
   "engines": {
     "node": "^6.9.0",
     "npm": "^4.0.0"
   },
   "scripts": {
-    "prestart": "node scripts/symlink.js",
+    "prestart": "rimraf dist example/dist",
     "start": "run-p watch:* serve",
-    "serve": "browser-sync start -s . -f dist example/dist example/**/*.html example/**/*.css --startPath /example",
+    "serve": "browser-sync start -s . -f example/* example/**/*.js --startPath /example",
     "test": "echo \"No tests yet...\" && exit 0",
-    "prebuild": "rimraf dist *.js *.js.map *.d.ts src/**/*.js src/**/*.js.map src/**/*.d.ts",
-    "postbuild": "rimraf *.ts src/**/*.ts",
-    "build": "run-p build:*",
-    "build:cjs": "tsc -m commonjs --outDir dist",
-    "build:esm": "tsc -d",
-    "watch:cjs": "tsc -w -m commonjs --outDir dist",
-    "watch:esm": "tsc -w -d",
-    "watch:example": "tsc -w -p example",
+    "prebuild": "rimraf dist",
+    "build": "tsc -d",
+    "watch:src": "tsc -w -d",
+    "watch:example": "webpack -w",
     "prepublish": "in-publish && npm run build || not-in-publish"
   },
   "keywords": [
@@ -64,16 +54,18 @@
     "browser-sync": "^2.18.8",
     "in-publish": "^2.0.0",
     "jasmine-core": "^2.5.2",
-    "karma": "^1.4.1",
+    "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-mocha-reporter": "^2.2.2",
     "karma-typescript-preprocessor2": "^1.2.1",
     "npm-run-all": "^4.0.1",
-    "rimraf": "^2.5.4",
-    "systemjs": "^0.20.7",
+    "rimraf": "^2.6.0",
+    "source-map-loader": "^0.1.6",
+    "ts-loader": "^2.0.0",
     "tslint": "^4.4.2",
-    "typescript": "^2.1.6"
+    "typescript": "^2.1.6",
+    "webpack": "^2.2.1"
   }
 }

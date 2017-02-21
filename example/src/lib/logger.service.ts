@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { Provider, FactoryCreator } from 'ng-esm';
 
 
@@ -14,7 +14,7 @@ export class LoggerProvider implements FactoryCreator {
   private timestamp = false;
 
   $get($log: ng.ILogService, dateFilter: ng.IFilterDate) {
-    return (...args) => {
+    return (...args: any[]) => {
       if (this.prefix) {
         args.unshift(this.prefix);
       }

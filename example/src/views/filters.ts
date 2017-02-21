@@ -26,7 +26,7 @@ const template = `
   template
 })
 export default class ViewFilters {
-  constructor(private reverseText: string) {}
+  constructor(public reverseText: string) {}
 
   @resolve
   static reverseText() {

@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { Factory, FactoryCreator } from 'ng-esm';
 
 

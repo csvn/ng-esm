@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { Component } from 'ng-esm';
 
 

@@ -11,7 +11,7 @@ const template = `
 
 
 @Resolve({
-  app: (appName) => appName
+  app: (appName: any) => appName
 })
 @State({
   name: 'home',

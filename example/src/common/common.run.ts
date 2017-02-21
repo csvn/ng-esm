@@ -1,4 +1,4 @@
-import ng from 'angular';
+import * as ng from 'angular';
 import { Run } from 'ng-esm';
 import uiRouter, { TransitionService } from 'angular-ui-router';
 

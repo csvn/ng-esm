@@ -1,5 +1,5 @@
-import ng from 'angular';
-import ngMaterial from 'angular-material';
+import * as ng from 'angular';
+import * as ngMaterial from 'angular-material';
 import { Config } from 'ng-esm';
 
 

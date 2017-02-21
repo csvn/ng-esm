@@ -119,7 +119,7 @@ class ViewRouterRow {}
     </section>`
 })
 export default class ViewRouter {
-  constructor($stateRegistry) {
+  constructor($stateRegistry: any) {
     console.log($stateRegistry);
   }
 }

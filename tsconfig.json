@@ -8,6 +8,7 @@
       "dom",
       "es2015"
     ],
+    "outDir": "dist",
     "newLine": "LF",
     "sourceMap": true,
     "skipLibCheck": true,
@@ -16,11 +17,10 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "experimentalDecorators": true
   },
   "include": [
-    "*",
     "src/**/*"
   ]
 }
