@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 import { serviceName } from './service';
-import { Dependencies } from '../common';
-import { createModule } from '../ng';
+import { Dependencies } from '../common/interface';
+import { createModule } from '../common/ng';
 
 
 const MSG = `'Decorate' can only take classes decorated with '@Service()' as parameter.`;

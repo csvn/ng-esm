@@ -1,5 +1,5 @@
-import { BaseConfig } from '../common';
-import { InjectConstructor, name, createModule } from '../ng';
+import { BaseConfig } from '../common/interface';
+import { InjectConstructor, name, createModule } from '../common/ng';
 
 
 const SERVICE_NAME = Symbol('serviceName');

@@ -1,6 +1,6 @@
 import * as ng from 'angular';
-import { name, createModule } from '../ng';
-import { BaseConfig, Dependencies } from '../common';
+import { name, createModule } from '../common/ng';
+import { BaseConfig, Dependencies } from '../common/interface';
 
 
 declare const angular: ng.IAngularStatic;

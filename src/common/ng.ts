@@ -1,5 +1,5 @@
 import * as ng from 'angular';
-import { Dependencies, BaseConfig } from './common';
+import { Dependencies, BaseConfig } from './interface';
 import { registerModuleId } from './debug';
 
 

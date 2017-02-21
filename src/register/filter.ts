@@ -1,7 +1,7 @@
 import * as ng from 'angular';
-import { toCamel } from '../case';
-import { InjectConstructor, name, createModule } from '../ng';
-import { BaseConfig } from '../common';
+import { toCamel } from '../common/case';
+import { InjectConstructor, name, createModule } from '../common/ng';
+import { BaseConfig } from '../common/interface';
 
 
 /** A class decorated with `@Filter()` should implement this interface */

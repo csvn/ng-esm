@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 import { StateProvider, Ng1ViewDeclaration, Ng1StateDeclaration } from 'angular-ui-router';
-import { config, createModule } from '../ng';
-import { BaseConfig } from '../common';
+import { config, createModule } from '../common/ng';
+import { BaseConfig } from '../common/interface';
 import { componentName } from './component';
 import { RESOLVES_SYMBOL } from './resolve';
 

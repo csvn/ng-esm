@@ -1,7 +1,7 @@
 import * as ng from 'angular';
-import { toCamel } from '../case';
-import { config, name, createModule } from '../ng';
-import { BaseConfig } from '../common';
+import { toCamel } from '../common/case';
+import { config, name, createModule } from '../common/ng';
+import { BaseConfig } from '../common/interface';
 
 
 /** Used for `@Directive()` decorator. Extended version of settings for `ng.module().directive()` */

@@ -1,6 +1,6 @@
 import * as ng from 'angular';
-import { InjectConstructor, createModule } from '../ng';
-import { Dependencies, OnInit } from '../common';
+import { InjectConstructor, createModule } from '../common/ng';
+import { Dependencies, OnInit } from '../common/interface';
 
 
 /** Decorate a class for `ng.module().config()`. The class must implement `OnInit` interface */

@@ -2,9 +2,9 @@
   "name": "ng-esm",
   "version": "2.0.0",
   "description": "ES2015 modules and decorators with Angular 1",
-  "main": "dist/main.js",
-  "jsnext:main": "dist/esm/main.js",
-  "typings": "dist/esm/main.d.ts",
+  "main": "dist/index.js",
+  "jsnext:main": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
   "files": [
     "dist",
     "src"

@@ -1,6 +1,6 @@
 import * as ng from 'angular';
-import { name, InjectConstructor, createModule } from '../ng';
-import { BaseConfig, FactoryCreator } from '../common';
+import { name, InjectConstructor, createModule } from '../common/ng';
+import { BaseConfig, FactoryCreator } from '../common/interface';
 
 
 /** Decorate class for service creation via factory. Implement the `FactoryCreator` interface */
