@@ -3,11 +3,17 @@
   "version": "2.0.0",
   "description": "ES2015 modules and decorators with AngularJS",
   "main": "dist/index.js",
-  "jsnext:main": "dist/esm/index.js",
-  "typings": "dist/esm/index.d.ts",
+  "module": "index.js",
+  "typings": "index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "index.js",
+    "index.js.map",
+    "index.d.ts",
+    "upgrade.js",
+    "upgrade.js.map",
+    "upgrade.d.ts"
   ],
   "engines": {
     "node": "^6.9.0",
@@ -18,7 +24,8 @@
     "start": "run-p watch:* serve",
     "serve": "browser-sync start -s . -f dist example/dist example/**/*.html example/**/*.css --startPath /example",
     "test": "echo \"No tests yet...\" && exit 0",
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist *.js *.js.map *.d.ts src/**/*.js src/**/*.js.map src/**/*.d.ts",
+    "postbuild": "rimraf *.ts src/**/*.ts",
     "build": "run-p build:*",
     "build:cjs": "tsc -m commonjs --outDir dist",
     "build:esm": "tsc -d",

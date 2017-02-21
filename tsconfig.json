@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
@@ -8,7 +9,6 @@
       "es2015"
     ],
     "newLine": "LF",
-    "outDir": "dist/esm",
     "sourceMap": true,
     "skipLibCheck": true,
     "importHelpers": true,
@@ -20,7 +20,7 @@
     "strictNullChecks": true
   },
   "include": [
-    "*.ts",
-    "src/**/*.ts"
+    "*",
+    "src/**/*"
   ]
 }
