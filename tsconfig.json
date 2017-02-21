@@ -8,7 +8,7 @@
       "es2015"
     ],
     "newLine": "LF",
-    "outDir": "../dist/esm",
+    "outDir": "dist/esm",
     "sourceMap": true,
     "skipLibCheck": true,
     "importHelpers": true,
@@ -18,5 +18,9 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "strictNullChecks": true
-  }
+  },
+  "include": [
+    "*.ts",
+    "src/**/*.ts"
+  ]
 }

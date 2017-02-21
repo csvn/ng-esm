@@ -9,7 +9,6 @@ export * from './register/decorate';
 export * from './register/directive';
 export * from './register/factory';
 export * from './register/filter';
-export * from './register/module';
 export * from './register/provider';
 export * from './register/resolve';
 export * from './register/run';

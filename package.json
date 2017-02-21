@@ -1,7 +1,7 @@
 {
   "name": "ng-esm",
   "version": "2.0.0",
-  "description": "ES2015 modules and decorators with Angular 1",
+  "description": "ES2015 modules and decorators with AngularJS",
   "main": "dist/index.js",
   "jsnext:main": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
@@ -20,10 +20,10 @@
     "test": "echo \"No tests yet...\" && exit 0",
     "prebuild": "rimraf dist",
     "build": "run-p build:*",
-    "build:cjs": "tsc -p src -m commonjs --outDir dist",
-    "build:esm": "tsc -d -p src",
-    "watch:cjs": "tsc -w -p src -m commonjs --outDir dist",
-    "watch:esm": "tsc -w -d -p src",
+    "build:cjs": "tsc -m commonjs --outDir dist",
+    "build:esm": "tsc -d",
+    "watch:cjs": "tsc -w -m commonjs --outDir dist",
+    "watch:esm": "tsc -w -d",
     "watch:example": "tsc -w -p example",
     "prepublish": "in-publish && npm run build || not-in-publish"
   },
