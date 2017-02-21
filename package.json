@@ -2,7 +2,7 @@
   "name": "ng-esm",
   "version": "2.0.0",
   "description": "ES2015 modules and decorators with AngularJS",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -19,7 +19,7 @@
     "serve": "browser-sync start -s . -f example/* example/**/*.js --startPath /example",
     "test": "echo \"No tests yet...\" && exit 0",
     "prebuild": "rimraf dist",
-    "build": "tsc -d",
+    "build": "tsc -d && tsc -m commonjs --outDir dist/cjs",
     "watch:src": "tsc -w -d",
     "watch:example": "webpack -w",
     "prepublish": "in-publish && npm run build || not-in-publish"
