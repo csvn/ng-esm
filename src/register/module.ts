@@ -3,15 +3,13 @@ import { name, createModule } from '../common/ng';
 import { BaseConfig, Dependencies } from '../common/interface';
 
 
-declare const angular: ng.IAngularStatic;
-
 /** Used for `@NgModule()` decorator. Option bag variant of `angular.module()` */
 export interface ModuleOptions extends BaseConfig {
   /** The name of the ng module. If not provided, the class name will be used instead */
   name?: string;
-  /** Register these key/value pairs as a value in angular */
+  /** Register these key/value pairs as a value in AngularJS */
   values?: { [name: string]: any };
-  /** Register these key/value pairs as a constant in angular */
+  /** Register these key/value pairs as a constant in AngularJS */
   constants?: { [name: string]: any };
 }
 
@@ -22,26 +20,32 @@ export interface NgModuleSignature {
   (moduleId: string, dependencies: Dependencies): Function;
 }
 
-/** Decorate a class as being an angular module */
-export const NgModule: NgModuleSignature = ModuleDecorator;
-
-
-function ModuleDecorator(val: string | Dependencies | ModuleOptions = {}, deps: Dependencies = []) {
+/** Decorate a class as being an AngularJS module */
+export const NgModule: NgModuleSignature = function NgModuleDecorator(val: any, deps?: any) {
   return function(target: Function): void {
-    let config: ModuleOptions;
-
-    if (Array.isArray(val)) {
-      config = { dependencies: val };
-    } else if (typeof val === 'string') {
-      config = { name: val, dependencies: deps };
-    } else {
-      config = val;
-    }
-
-    let ngMod = createModule(target, config.dependencies, name(target, config));
-
-    // Register values and constants
-    angular.forEach(config.values, (val, key) => ngMod.value(key, val));
-    angular.forEach(config.constants, (val, key) => ngMod.constant(key, val));
+    initializeModule(target, normalizeConfig(val, deps));
   };
+};
+
+
+/** (internal) */
+export function normalizeConfig(
+  val: string | Dependencies | ModuleOptions = {},
+  deps: Dependencies = []
+) {
+  if (Array.isArray(val)) {
+    return { dependencies: val };
+  } else if (typeof val === 'string') {
+    return { name: val, dependencies: deps };
+  }
+  return val;
+}
+
+/** (internal) */
+export function initializeModule(target: Function, options: ModuleOptions) {
+  const ngMod = createModule(target, options.dependencies, name(target, options));
+
+  // Register values and constants
+  ng.forEach(options.values, (val, key) => ngMod.value(key, val));
+  ng.forEach(options.constants, (val, key) => ngMod.constant(key, val));
 }
