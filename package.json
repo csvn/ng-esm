@@ -1,6 +1,6 @@
 {
   "name": "ng-esm",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "ES2015 modules and decorators with AngularJS",
   "main": "dist/cjs/index.js",
   "module": "dist/index.js",
