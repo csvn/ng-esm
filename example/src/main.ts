@@ -1,15 +1,11 @@
 import './config';
-import { NgModule, getModuleIds } from 'ng-esm';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { App } from './angular.js.module';
+import { AppModule } from './angular.module';
 
-import common from './common';
-import views from './views';
 
-
-@NgModule({
-  dependencies: [common, views],
-  values: { appName: 'ng-esm' },
-  constants: { constant: 'Const val!' }
-})
-export class App {}
-
-console.info('Registered AngularJS modules: ', getModuleIds());
+platformBrowserDynamic().bootstrapModule(AppModule).then(platformRef => {
+  const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;
+  upgrade.bootstrap(document.body, [App.name]);
+});

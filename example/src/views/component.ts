@@ -1,12 +1,13 @@
-import uiRouter from 'angular-ui-router';
 import { State, Component, resolve } from 'ng-esm';
-import { Greeter, Ticker } from '../lib';
+import { AngularComponent, Greeter, Ticker } from '../lib';
 
 
 const template = `
   <h1>Components</h1>
 
   <md-divider></md-divider>
+
+  <my-angular [major]="2" [minor]="4" [patch]="8"></my-angular>
 
   <my-greeter name="John" greetings="vm.greetings"></my-greeter>
 
@@ -18,7 +19,7 @@ const template = `
   name: 'components',
   url: '/components',
   bindings: {},
-  dependencies: [uiRouter, Greeter, Ticker]
+  dependencies: [AngularComponent, Greeter, Ticker]
 })
 @Component({
   bindings: {
