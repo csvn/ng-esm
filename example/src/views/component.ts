@@ -1,5 +1,6 @@
 import { State, Component, resolve } from 'ng-esm';
-import { AngularComponent, Greeter, Ticker } from '../lib';
+import { Downgrade } from 'ng-esm/dist/upgrade';
+import { AngularComponent, AngularAltComponent, Greeter, Ticker } from '../lib';
 
 
 const template = `
@@ -7,19 +8,25 @@ const template = `
 
   <md-divider></md-divider>
 
-  <my-angular [major]="2" [minor]="4" [patch]="8"></my-angular>
+  <my-angular [major]="2" [minor]="4" [patch]="8" (foo)="vm.log('my-angular', $event)">
+  </my-angular>
+
+  <my-angular-alt [major]="4" [minor]="0" [patch]="0" (foo)="vm.log('my-angular-alt', $event)">
+  </my-angular-alt>
 
   <my-greeter name="John" greetings="vm.greetings"></my-greeter>
 
   <my-ticker></my-ticker>
 `;
 
+Downgrade()(AngularAltComponent);
+
 
 @State({
   name: 'components',
   url: '/components',
   bindings: {},
-  dependencies: [AngularComponent, Greeter, Ticker]
+  dependencies: [AngularComponent, AngularAltComponent, Greeter, Ticker]
 })
 @Component({
   bindings: {
@@ -29,6 +36,10 @@ const template = `
 })
 export default class ViewComponent {
   greetings: string;
+
+  log(type: string, ...msgs: string[]) {
+    console.log(type, ...msgs);
+  }
 
   @resolve
   static greetings($log: ng.ILogService) {

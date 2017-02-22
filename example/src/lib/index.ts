@@ -1,4 +1,5 @@
 export * from './angular.component';
+export * from './angular-alt.component';
 export * from './color.service';
 export * from './greeter.component';
 export * from './logger.service';

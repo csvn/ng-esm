@@ -1,4 +1,3 @@
-import { Downgrade } from 'ng-esm/dist/upgrade';
 import { Component, Input, Output, HostListener, EventEmitter } from '@angular/core';
 
 
@@ -35,18 +34,18 @@ const template = `
     margin: 16px -16px;
   }
   </style>
-  <h2>Angular</h2>
-  <p><small>Downgraded Angular => AngularJS</small></p>
+  <h2>Angular Alt</h2>
+  <p><small>Downgraded Angular => AngularJS but not in this component!</small></p>
   <hr />
   <p>Woot woot! This is a Angular ({{ version }}) component!</p>
 `;
 
-@Downgrade()
+
 @Component({
-  selector: 'my-angular',
+  selector: 'my-angular-alt',
   template
 })
-export class AngularComponent {
+export class AngularAltComponent {
   @Input()
   major: number;
   @Input()

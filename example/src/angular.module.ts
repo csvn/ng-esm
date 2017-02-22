@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { AngularComponent } from './lib';
+import { AngularComponent, AngularAltComponent } from './lib';
 
 
 @NgModule({
@@ -10,10 +10,12 @@ import { AngularComponent } from './lib';
     UpgradeModule
   ],
   declarations: [
-    AngularComponent
+    AngularComponent,
+    AngularAltComponent
   ],
   entryComponents: [
-    AngularComponent
+    AngularComponent,
+    AngularAltComponent
   ]
 })
 export class AppModule {
