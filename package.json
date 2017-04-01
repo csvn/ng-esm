@@ -37,21 +37,21 @@
     "url": "https://github.com/csvn/ng-esm.git"
   },
   "dependencies": {
-    "tslib": "^1.5.0"
+    "tslib": "^1.6.0"
   },
   "peerDependencies": {
     "angular": "~1.5.11",
     "angular-ui-router": "^1.0.0-rc.1"
   },
   "devDependencies": {
-    "@angular/common": "^2.4.8",
-    "@angular/compiler": "^2.4.8",
-    "@angular/core": "^2.4.8",
-    "@angular/platform-browser": "^2.4.8",
-    "@angular/platform-browser-dynamic": "^2.4.8",
-    "@angular/upgrade": "^2.4.8",
+    "@angular/common": "^4.0.1",
+    "@angular/compiler": "^4.0.1",
+    "@angular/core": "^4.0.1",
+    "@angular/platform-browser": "^4.0.1",
+    "@angular/platform-browser-dynamic": "^4.0.1",
+    "@angular/upgrade": "^4.0.1",
     "@types/angular": "~1.5.23",
-    "@types/angular-material": "^1.1.45",
+    "@types/angular-material": "1.1.47",
     "angular": "~1.5.11",
     "angular-animate": "~1.5.11",
     "angular-aria": "~1.5.11",
@@ -70,11 +70,11 @@
     "npm-run-all": "^4.0.1",
     "rimraf": "^2.6.0",
     "rxjs": "^5.2.0",
-    "source-map-loader": "^0.1.6",
+    "source-map-loader": "^0.2.1",
     "ts-loader": "^2.0.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.1.6",
-    "webpack": "^2.2.1",
-    "zone.js": "^0.7.7"
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.2",
+    "webpack": "^2.3.2",
+    "zone.js": "^0.8.5"
   }
 }
